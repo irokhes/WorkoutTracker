@@ -6,6 +6,8 @@ using System.Linq.Expressions;
 
 namespace WorkoutTracker.Api
 {
+    //http://codereview.stackexchange.com/questions/14226/generic-repository-and-unit-of-work-code
+
     public class Repository<T> : IRepository<T> where T : class
     {
         readonly DbContext _context;
