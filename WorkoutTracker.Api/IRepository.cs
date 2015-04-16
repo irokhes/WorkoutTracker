@@ -6,6 +6,7 @@ namespace WorkoutTracker.Api
 {
     public interface IRepository<T> where T : class
     {
+        IEnumerable<T> GetAll();
         IEnumerable<T> Get(Expression<Func<T, bool>> filter = null);
 
         T GetById(int id);

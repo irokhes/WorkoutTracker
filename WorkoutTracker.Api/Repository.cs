@@ -19,6 +19,11 @@ namespace WorkoutTracker.Api
             _dbSet = _context.Set<T>();
         }
 
+        public IEnumerable<T> GetAll()
+        {
+            return _dbSet;
+        }
+
         public IEnumerable<T> Get(Expression<Func<T, bool>> filter)
         {
             return _dbSet.Where(filter);
