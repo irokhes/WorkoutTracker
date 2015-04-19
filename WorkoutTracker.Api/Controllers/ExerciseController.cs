@@ -9,20 +9,23 @@ namespace WorkoutTracker.Api.Controllers
 {
     public class ExerciseController : ApiController
     {
+        readonly IUnitOfWork _unitOfWork;
+
+        public ExerciseController(IUnitOfWork unitOfWork )
+        {
+            _unitOfWork = unitOfWork;
+        }
+
         // GET api/<controller>
         public IEnumerable<Exercise> Get()
         {
-            return new List<Exercise>
-            {
-                new Exercise{Name = "Bench Press with barebell"},
-                new Exercise{Name = "Bench Press with dumbell"}
-            };
+            return _unitOfWork.RepositoryFor<Exercise>().GetAll();
         }
 
         // GET api/<controller>/5
-        public string Get(int id)
+        public IHttpActionResult Get(int id)
         {
-            return "value";
+            return Ok(_unitOfWork.RepositoryFor<Exercise>().GetById(id));
         }
 
         // POST api/<controller>
