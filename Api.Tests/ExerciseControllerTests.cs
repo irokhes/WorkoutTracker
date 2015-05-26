@@ -5,6 +5,7 @@ using Machine.Specifications;
 using Moq;
 using WorkoutTracker.Api;
 using WorkoutTracker.Api.Controllers;
+using WorkoutTracker.Api.Models;
 using It = Machine.Specifications.It;
 
 namespace UnitTests
@@ -36,5 +37,11 @@ namespace UnitTests
         };
 
 
+    }
+
+
+    public class When_getting_a_exercise_by_id : WithSubject<ExerciseController>
+    {
+        
     }
 }

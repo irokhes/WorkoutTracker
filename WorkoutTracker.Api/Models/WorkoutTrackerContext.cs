@@ -1,8 +1,7 @@
 using System.Configuration;
 using System.Data.Entity;
-using WorkoutTracker.Api.Controllers;
 
-namespace WorkoutTracker.Api
+namespace WorkoutTracker.Api.Models
 {
     public class WorkoutTrackerContext : DbContext
     {

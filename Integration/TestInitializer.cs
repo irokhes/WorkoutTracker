@@ -4,6 +4,7 @@ using System.Data.Entity.Migrations;
 using NUnit.Framework;
 using WorkoutTracker.Api;
 using WorkoutTracker.Api.Controllers;
+using WorkoutTracker.Api.Models;
 
 namespace WorkoutTracker.Test.Integration
 {
