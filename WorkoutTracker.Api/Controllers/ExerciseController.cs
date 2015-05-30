@@ -9,7 +9,6 @@ using WorkoutTracker.Api.Models;
 
 namespace WorkoutTracker.Api.Controllers
 {
-    [RoutePrefix("api/newExercise")]
     public class ExerciseController : ApiController
     {
         readonly IUnitOfWork _unitOfWork;
@@ -20,20 +19,17 @@ namespace WorkoutTracker.Api.Controllers
             _unitOfWork = unitOfWork;
         }
 
-        [Route("/")]
         public IEnumerable<Exercise> Get()
         {
             return _unitOfWork.RepositoryFor<Exercise>().GetAll();
         }
 
-        [Route("/{id:int:min(1)}")]
         public IHttpActionResult Get(int id)
         {
             return Ok(_unitOfWork.RepositoryFor<Exercise>().GetById(id));
         }
 
         [HttpPost]
-        [Route("/")]
         public IHttpActionResult Post([FromBody]Exercise newExercise)
         {
             if (!ModelState.IsValid)
