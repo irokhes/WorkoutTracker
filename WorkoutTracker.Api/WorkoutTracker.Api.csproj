@@ -128,12 +128,16 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="app\app.js" />
+    <Content Include="app\Exercises\exercise.html" />
+    <Content Include="app\Exercises\exerciseService.js" />
     <Content Include="app\Exercises\ExerciseController.js" />
+    <Content Include="app\Navigation\NavigationController.js" />
     <Content Include="Content\bootstrap.css" />
     <Content Include="Content\bootstrap.min.css" />
     <Content Include="Content\Site.css" />
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Global.asax" />
+    <Content Include="Index.html" />
     <Content Include="Scripts\angular.min.js" />
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />
@@ -144,7 +148,6 @@
     </Content>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="App_Start\MvcConfig.cs" />
     <Compile Include="App_Start\NinjectResolver.cs" />
     <Compile Include="App_Start\NinjectScope.cs" />
     <Compile Include="App_Start\NinjectWebCommon.cs" />
@@ -163,13 +166,9 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="packages.config" />
-    <Content Include="Views\Home\Index.cshtml" />
     <Content Include="fonts\glyphicons-halflings-regular.woff" />
     <Content Include="fonts\glyphicons-halflings-regular.ttf" />
     <Content Include="fonts\glyphicons-halflings-regular.eot" />
-    <Content Include="Views\Web.config">
-      <SubType>Designer</SubType>
-    </Content>
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
