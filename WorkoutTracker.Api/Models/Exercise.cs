@@ -1,9 +1,15 @@
-﻿namespace WorkoutTracker.Api.Models
+﻿using Newtonsoft.Json;
+using Newtonsoft.Json.Converters;
+
+namespace WorkoutTracker.Api.Models
 {
     public class Exercise
     {
         public int  Id { get;  private set; }
+
         public string Name { get; set; }
+
+        [JsonConverter(typeof(StringEnumConverter))]
         public MuscularGroup MuscularGroup { get; set; }
     }
 
