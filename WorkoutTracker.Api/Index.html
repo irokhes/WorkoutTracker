@@ -23,7 +23,7 @@
                 <div class="navbar-collapse collapse" data-collapse="!navbarExpanded">
                     <ul class="nav navbar-nav navbar-right">
                         <li ng-class="{'active':nav.isActive('/exercises')}"><a href="#/exercises">Exercises</a></li>
-                        <li ng-class="{'active':nav.isActive('/places')}"><a href="#/places">My Places</a></li>
+                        <li ng-class="{'active':nav.isActive('/workouts')}"><a href="#/workouts">Workouts</a></li>
                         <li ng-class="{'active':nav.isActive('/about')}"><a href="#/about">About</a></li>
                     </ul>
                 </div>
@@ -50,3 +50,5 @@
 <!-- Load controllers-->
 <script type="text/javascript" src="/app/Exercises/ExerciseController.js"></script>
 <script type="text/javascript" src="/app/Navigation/NavigationController.js"></script>
+<!-- Load services-->
+<script type="text/javascript" src="/app/Exercises/exerciseService.js"></script>

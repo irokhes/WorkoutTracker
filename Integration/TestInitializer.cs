@@ -2,8 +2,6 @@
 using System.Data.Entity;
 using System.Data.Entity.Migrations;
 using NUnit.Framework;
-using WorkoutTracker.Api;
-using WorkoutTracker.Api.Controllers;
 using WorkoutTracker.Api.Models;
 
 namespace WorkoutTracker.Test.Integration
@@ -14,8 +12,8 @@ namespace WorkoutTracker.Test.Integration
         {
            context.Exercises.AddOrUpdate(
                                 c => c.Id,
-                                new Exercise { Name = "Exercise 1" },
-                                new Exercise { Name = "Exercise 2" });
+                                new Exercise { Name = "Pull Ups", MuscularGroup = MuscularGroup.Back},
+                                new Exercise { Name = "Bench Press", MuscularGroup = MuscularGroup.Chest});
  
             base.Seed(context);
         }

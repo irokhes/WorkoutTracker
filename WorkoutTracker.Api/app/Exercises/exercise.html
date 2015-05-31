@@ -1,4 +1,51 @@
-﻿<div ng-controller="ExerciseController as exercise">
-    <h1>{{ exercise.welcome }}</h1>
+﻿<div class="col-xs-12 col-sm-12 col-md-offset-2 col-md-8 col-md-offset-2" ng-controller="ExerciseController">
+    <form class="form-horizontal">
+        <div class="well well-sm" ng-show="totalRecordsCount == 0">
+            <h5>No Exercises found</h5>
+        </div>
+        <div ng-show="totalExercises > 0">
+            <div class="row">
+                <div class="col-md-12">
+                    <input type="text" ng-model="filterValue" class="form-control" placeholder="Filter Exercises by (Name) or (Muscle Group)" />
+                </div>
+            </div>
+            <ul class="list-group" ng-repeat="exercise in exercices">
+                <li class="list-group-item">
+                    <div class="row">
+                        <div class="col-xs-6 col-md-8">
+                            <a href="" ng-click="showExerciseDetails(exercise.Id)">
+                                <h2 class="exerciseName">{{exercise.Name}}</h2>
+                            </a>
+                        </div>
+                        <div class="col-xs-4 col-md-3">
+                            &nbsp;
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-xs-2 col-md-1">
+                            <span class="badge">{{exercise.MuscularGroup}}</span>
+                        </div>
+                    </div>
 
+                </li>
+            </ul>
+        </div>
+
+        <div class="row">
+
+            <div class="col-md-offset-2 col-md-8 col-md-offset-2 text-center">
+                <div ng-show="totalExercises > 0">
+                    <div>
+                        <div data-pagination="" data-previous-text="<" data-next-text=">" data-first-text="<<" data-last-text=">>"
+                             data-on-select-page="pageChanged(page)" data-total-items="totalRecordsCount" data-page="currentPage"
+                             data-boundary-links="true" class="pagination pagination-sm" data-max-size="5" data-rotate="false" data-items-per-page="10">
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+
+
+    </form>
 </div>
