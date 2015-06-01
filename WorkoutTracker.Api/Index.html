@@ -8,10 +8,10 @@
 </head>
 <body>
     <div id="page">
-        <header class="container" ng-controller="NavigationController as nav">
+        <header class="container" ng-controller="NavigationController">
             <div id="menu" class="navbar navbar-default">
                 <div class="navbar-header">
-                    <button class="btn btn-success navbar-toggle" data-ng-click="navbarExpanded = !navbarExpanded">
+                    <button class="btn btn-success navbar-toggle" ng-click="navbarExpanded = !navbarExpanded">
                         <span class="glyphicon glyphicon-chevron-down"></span>
                     </button>
                     <div id="logo">
@@ -22,14 +22,14 @@
                 </div>
                 <div class="navbar-collapse collapse" data-collapse="!navbarExpanded">
                     <ul class="nav navbar-nav navbar-right">
-                        <li ng-class="{'active':nav.isActive('/exercises')}"><a href="#/exercises">Exercises</a></li>
-                        <li ng-class="{'active':nav.isActive('/workouts')}"><a href="#/workouts">Workouts</a></li>
-                        <li ng-class="{'active':nav.isActive('/about')}"><a href="#/about">About</a></li>
+                        <li ng-class="{'active':isActive('/exercises')}"><a href="#/exercises">Exercises</a></li>
+                        <li ng-class="{'active':isActive('/workouts')}"><a href="#/workouts">Workouts</a></li>
+                        <li ng-class="{'active':isActive('/about')}"><a href="#/about">About</a></li>
                     </ul>
                 </div>
             </div>
         </header>
-        <section id="body" class="container">
+        <section id="body" class="container-fluid">
             <div ng-view=""></div>
         </section>
         <hr />

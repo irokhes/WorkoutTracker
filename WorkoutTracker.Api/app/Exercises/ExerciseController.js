@@ -3,7 +3,8 @@
     app.controller('ExerciseController', ['$scope','exerciseService', function ($scope, exerciseService) {
         $scope.exercices = [];
         $scope.totalExercises = 0;
-
+        $scope.categories = ['All','Biceps', 'Triceps', 'Back', 'Chest', 'Legs', 'Abs'];
+        $scope.categories.selected = $scope.categories[0];
         init();
 
         function init() {
