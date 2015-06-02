@@ -131,6 +131,7 @@
     <Content Include="app\Exercises\exercise.html" />
     <Content Include="app\Exercises\exerciseService.js" />
     <Content Include="app\Exercises\ExerciseController.js" />
+    <Content Include="app\Filters\exercisesFilter.js" />
     <Content Include="app\Navigation\NavigationController.js" />
     <Content Include="Content\bootstrap.css" />
     <Content Include="Content\bootstrap.min.css" />
