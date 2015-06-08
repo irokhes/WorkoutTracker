@@ -18,8 +18,8 @@ namespace UnitTests
         {
             exercises = new List<Exercise>
             {
-                new Exercise{ Id = 1, Name = "my first exercise"},
-                new Exercise{ Id = 2, Name = "my second exercise"},
+                new Exercise{ Name = "my first exercise"},
+                new Exercise{ Name = "my second exercise"},
             };
             var mockRepository = new Mock<IRepository<Exercise>>();
             mockRepository.Setup(x => x.GetAll()).Returns(exercises);
@@ -39,9 +39,4 @@ namespace UnitTests
 
     }
 
-
-    public class When_getting_a_exercise_by_id : WithSubject<ExerciseController>
-    {
-        
-    }
 }

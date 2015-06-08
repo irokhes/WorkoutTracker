@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Data.Entity;
+using System.Data.Entity.Infrastructure;
 using System.Linq;
 using System.Linq.Expressions;
 
@@ -37,6 +38,21 @@ namespace WorkoutTracker.Api
         public void Insert(T entity)
         {
             _dbSet.Add(entity);
+        }
+
+        public void Update(T entity)
+        {
+            _dbSet.Attach(entity);
+            DbEntityEntry entry = _context.Entry(entity);
+            foreach (var propertyName in entry.OriginalValues.PropertyNames)
+            {
+                var original = entry.GetDatabaseValues().GetValue<object>(propertyName);
+                var current = entry.CurrentValues.GetValue<object>(propertyName);
+                if (!object.Equals(original, current))
+                {
+                    entry.Property(propertyName).IsModified = true;
+                }
+            }
         }
 
         public void Delete(T entity)
