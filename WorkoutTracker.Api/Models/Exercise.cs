@@ -5,7 +5,7 @@ namespace WorkoutTracker.Api.Models
 {
     public class Exercise
     {
-        public int  Id { get;  private set; }
+        public int  Id { get;  set; }
 
         public string Name { get; set; }
 

@@ -1,4 +1,6 @@
-﻿using System.Linq;
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
 using NUnit.Framework;
 using WorkoutTracker.Api;
 using WorkoutTracker.Api.Controllers;
@@ -35,5 +37,19 @@ namespace WorkoutTracker.Test.Integration
             var result =_unitOfWork.RepositoryFor<Exercise>().GetById(newExercise.Id);
             Assert.IsNotNull(result);
         }
+
+        [Test]
+        public void creating_a_new_workout()
+        {
+            var exercisesInDB = _unitOfWork.RepositoryFor<Exercise>().GetAll();
+            var exercise = exercisesInDB.First();
+            var exercises = new List<Exercise>{new Exercise{Id = exercise.Id, MuscularGroup = exercise.MuscularGroup, Name = exercise.Name}};
+            var workout = new Workout {Date = DateTime.Now, Name = "Chest workout", Exercises = exercises};
+            _unitOfWork.RepositoryFor<Workout>().Insert(workout);
+            _unitOfWork.Commit();
+            var result = _unitOfWork.RepositoryFor<Workout>().GetById(workout.Id);
+            Assert.IsNotNull(result);
+        }
+
     }
 }

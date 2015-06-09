@@ -6,6 +6,7 @@ namespace WorkoutTracker.Api.Models
     public class WorkoutTrackerContext : DbContext
     {
         public DbSet<Exercise> Exercises { get; set; }
+        public DbSet<Workout> Workouts { get; set; }
 
         public WorkoutTrackerContext()
             : base(ConfigurationManager.ConnectionStrings["workoutConnectionString"].ConnectionString)
