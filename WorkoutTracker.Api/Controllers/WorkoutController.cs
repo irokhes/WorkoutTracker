@@ -38,8 +38,8 @@ namespace WorkoutTracker.Api.Controllers
             if (!ModelState.IsValid)
                 return BadRequest(ModelState);
             _unitOfWork.RepositoryFor<Workout>().Insert(newWorkout);
-
-            return Created(Request.RequestUri + newWorkout.Id.ToString(CultureInfo.InvariantCulture), newWorkout);
+            
+            return Created(Request.RequestUri + newWorkout.Id.ToString(), newWorkout);
     
         }
 

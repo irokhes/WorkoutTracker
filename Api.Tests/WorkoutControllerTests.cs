@@ -1,5 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Net.Http;
+using System.Web;
 using System.Web.Http;
 using System.Web.Http.Results;
 using Machine.Fakes;
@@ -41,7 +43,32 @@ namespace UnitTests
         };
     }
 
+    public class When_creating_a_new_workout : WithSubject<WorkoutController>
+    {
+        static List<Workout> workouts;
+        static IHttpActionResult result;
 
+        Establish context = () =>
+        {
+            var mockRepository = new Mock<IRepository<Workout>>();
+            Subject.Request = new HttpRequestMessage()
+            {
+                RequestUri = new Uri("http://newWorkoutUri")
+            };
+            The<IUnitOfWork>().WhenToldTo(x => x.RepositoryFor<Workout>()).Return(mockRepository.Object);
+        };
+
+        Because of = () =>
+        {
+            result = Subject.Post(new Workout { Name = "first workout", Date = DateTime.Now.AddDays(-1).Date, Exercises = new List<Exercise>() });
+        };
+
+        It should_contain_a_list_of_workouts = () =>
+        {
+            result.ShouldBeOfExactType<CreatedNegotiatedContentResult<Workout>>();
+            ((CreatedNegotiatedContentResult<Workout>) result).Content.Name.ShouldEqual("first workout");
+        };
+    }
 
     public class when_adding_an_exercise_to_an_existing_workout : WithSubject<WorkoutController>
     {

@@ -23,7 +23,7 @@ namespace WorkoutTracker.Api.Controllers
         {
             return _unitOfWork.RepositoryFor<Exercise>().GetAll();
         }
-
+            
         public IHttpActionResult Get(int id)
         {
             return Ok(_unitOfWork.RepositoryFor<Exercise>().GetById(id));
