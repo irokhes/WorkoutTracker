@@ -12,7 +12,7 @@
         init();
 
         function init() {
-            createWatche();
+            createWatch();
             getExercises();
         };
 
@@ -32,7 +32,7 @@
             $scope.totalFilteredExercises = $scope.filteredExercises.length;
         };
 
-        function createWatche() {
+        function createWatch() {
 
             $scope.$watch("filterValue", function (filterValue) {
                 filterExercises(filterValue, $scope.selectedMuscularGroup);

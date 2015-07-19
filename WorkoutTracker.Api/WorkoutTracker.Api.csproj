@@ -133,6 +133,8 @@
     <Content Include="app\Exercises\ExerciseController.js" />
     <Content Include="app\Filters\exercisesFilter.js" />
     <Content Include="app\Navigation\NavigationController.js" />
+    <Content Include="app\Workouts\workout.html" />
+    <Content Include="app\Workouts\workoutService.js" />
     <Content Include="Content\bootstrap.css" />
     <Content Include="Content\bootstrap.min.css" />
     <Content Include="Content\Site.css" />
@@ -180,7 +182,6 @@
     </None>
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="app\Workouts\" />
     <Folder Include="App_Data\" />
   </ItemGroup>
   <PropertyGroup>
