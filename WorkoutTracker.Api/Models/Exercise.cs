@@ -9,7 +9,6 @@ namespace WorkoutTracker.Api.Models
 
         public string Name { get; set; }
 
-        [JsonConverter(typeof(StringEnumConverter))]
         public MuscularGroup MuscularGroup { get; set; }
     }
 

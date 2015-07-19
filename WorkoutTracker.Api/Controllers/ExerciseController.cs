@@ -5,6 +5,7 @@ using System.Linq;
 using System.Net;
 using System.Net.Http;
 using System.Web.Http;
+using WorkoutTracker.Api.Dtos;
 using WorkoutTracker.Api.Models;
 
 namespace WorkoutTracker.Api.Controllers
@@ -19,14 +20,21 @@ namespace WorkoutTracker.Api.Controllers
             _unitOfWork = unitOfWork;
         }
 
-        public IEnumerable<Exercise> Get()
+        static ExerciseDto GetDto(Exercise exercise)
         {
-            return _unitOfWork.RepositoryFor<Exercise>().GetAll();
+            return new ExerciseDto { Id = exercise.Id, MuscularGroup = exercise.MuscularGroup, Name = exercise.Name };
         }
-            
+
+        public IEnumerable<ExerciseDto> Get()
+        {
+            return _unitOfWork.RepositoryFor<Exercise>().GetAll().Select(GetDto);
+        }
+
+        
+
         public IHttpActionResult Get(int id)
         {
-            return Ok(_unitOfWork.RepositoryFor<Exercise>().GetById(id));
+            return Ok(GetDto(_unitOfWork.RepositoryFor<Exercise>().GetById(id)));
         }
 
         [HttpPost]

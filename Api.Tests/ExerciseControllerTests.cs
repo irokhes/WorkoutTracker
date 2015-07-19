@@ -5,6 +5,7 @@ using Machine.Specifications;
 using Moq;
 using WorkoutTracker.Api;
 using WorkoutTracker.Api.Controllers;
+using WorkoutTracker.Api.Dtos;
 using WorkoutTracker.Api.Models;
 using It = Machine.Specifications.It;
 
@@ -13,7 +14,7 @@ namespace UnitTests
     public class When_getting_a_list_of_exercises : WithSubject<ExerciseController>
     {
         static List<Exercise> exercises;
-        static IEnumerable<Exercise> result;
+        static IEnumerable<ExerciseDto> result;
         Establish context = () =>
         {
             exercises = new List<Exercise>

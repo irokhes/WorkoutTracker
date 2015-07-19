@@ -131,9 +131,11 @@
     <Content Include="app\Exercises\exercise.html" />
     <Content Include="app\Exercises\exerciseService.js" />
     <Content Include="app\Exercises\ExerciseController.js" />
+    <Content Include="app\Filters\workoutsFilter.js" />
     <Content Include="app\Filters\exercisesFilter.js" />
     <Content Include="app\Navigation\NavigationController.js" />
     <Content Include="app\Workouts\workout.html" />
+    <Content Include="app\Workouts\WorkoutController.js" />
     <Content Include="app\Workouts\workoutService.js" />
     <Content Include="Content\bootstrap.css" />
     <Content Include="Content\bootstrap.min.css" />
@@ -157,6 +159,7 @@
     <Compile Include="App_Start\WebApiConfig.cs" />
     <Compile Include="Controllers\WorkoutController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
+    <Compile Include="Dtos\ExerciseDto.cs" />
     <Compile Include="Models\Exercise.cs" />
     <Compile Include="Controllers\ExerciseController.cs" />
     <Compile Include="Global.asax.cs">

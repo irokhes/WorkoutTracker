@@ -7,7 +7,11 @@
         $routeProvider.when("/exercises", {
             controller: "ExerciseController",
             templateUrl: "app/Exercises/exercise.html"
-        });
-        $routeProvider.otherwise({ redirectTo: '/exercises' });
+        })
+        .when("/workouts", {
+            controller: "WorkoutController",
+            templateUrl: "app/Workouts/workout.html"
+        })
+        .otherwise({ redirectTo: '/exercises' });
     });
 })();
