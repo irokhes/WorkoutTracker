@@ -3,7 +3,6 @@ using System.Collections.Generic;
 using System.Linq;
 using NUnit.Framework;
 using WorkoutTracker.Api;
-using WorkoutTracker.Api.Controllers;
 using WorkoutTracker.Api.Models;
 
 namespace WorkoutTracker.Test.Integration
@@ -51,7 +50,7 @@ namespace WorkoutTracker.Test.Integration
             var result = _unitOfWork.RepositoryFor<Workout>().GetById(workout.Id);
             Assert.IsNotNull(result);
             var result2 = _unitOfWork.RepositoryFor<Workout>().GetById(workout2.Id);
-            Assert.IsNotNull(result);
+            Assert.IsNotNull(result2);
         }
 
     }

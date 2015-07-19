@@ -7,5 +7,9 @@
             return $http.get(urlBase);
         };
 
+        this.get = function(id) {
+            return $http.get(urlBase + '/' + id);
+        }
+
     }]);
 })();

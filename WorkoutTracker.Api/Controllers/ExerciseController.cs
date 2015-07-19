@@ -4,6 +4,7 @@ using System.Globalization;
 using System.Linq;
 using System.Net;
 using System.Net.Http;
+using System.Security.Cryptography.X509Certificates;
 using System.Web.Http;
 using WorkoutTracker.Api.Dtos;
 using WorkoutTracker.Api.Models;
@@ -22,7 +23,7 @@ namespace WorkoutTracker.Api.Controllers
 
         static ExerciseDto GetDto(Exercise exercise)
         {
-            return new ExerciseDto { Id = exercise.Id, MuscularGroup = exercise.MuscularGroup, Name = exercise.Name };
+            return new ExerciseDto { Id = exercise.Id, MuscularGroup = exercise.MuscularGroup, Name = exercise.Name, Description = exercise.Description };
         }
 
         [Route("api/exercise")]

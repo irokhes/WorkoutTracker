@@ -4,12 +4,15 @@
             <h5>No Exercises found</h5>
         </div>
         <div ng-show="totalExercises > 0">
-            <div class="row">
-                <div class="col-md-8">
+            <div class="form-group">
+                <div class="col-md-5">
                     <input type="text" ng-model="filterValue" class="form-control" placeholder="Filter Exercises by (Name) or (Muscle Group)" />
                 </div>
-                <div class="col-md-4">
+                <div class="col-md-5">
                     <select ng-model="selectedMuscularGroup" class="form-control" ng-options="item for item in muscularGroup"></select>
+                </div>
+                <div class="col-md-2 col-xs-4 col-sm-2">
+                    <button class="btn btn-primary pull-right" data-ng-click="doSearch()"><span class="glyphicon glyphicon-search"></span>New</button>
                 </div>
             </div>
             <ul class="list-group" ng-repeat="exercise in filteredExercises">

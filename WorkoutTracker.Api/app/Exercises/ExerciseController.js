@@ -1,6 +1,6 @@
 ﻿(function() {
     'use strict';
-    app.controller('ExerciseController', ['$scope', 'exerciseService', '$filter', function ($scope, exerciseService, $filter) {
+    app.controller('ExerciseController', ['$scope', '$location', 'exerciseService', '$filter', function ($scope, $location, exerciseService, $filter) {
         $scope.exercices = [];
         $scope.totalExercises = 0;
         $scope.filteredExercises = [];
@@ -16,6 +16,11 @@
             getExercises();
         };
 
+
+        $scope.showExerciseDetails = function(id) {
+            //$location.path('/exercises/' + id);
+        }
+
         function getExercises() {
             exerciseService.get().success(function (exercises) {
                 $scope.exercices = exercises;
@@ -26,6 +31,8 @@
                 $scope.status = 'Unable to load exercises: ' + error.message;
             });
         }
+
+
 
         function filterExercises(filterValue, muscularGroup) {
             $scope.filteredExercises = $filter('exercisesFilter')($scope.exercices, filterValue, muscularGroup);
