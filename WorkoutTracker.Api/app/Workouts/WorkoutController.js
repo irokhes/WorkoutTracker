@@ -1,12 +1,12 @@
 ﻿(function() {
     'use strict';
-    app.controller('WorkoutController', ['$scope', 'workoutService', '$filter', function($scope, workoutService) {
+    app.controller('WorkoutController', ['$scope', 'workoutService', '$filter', function($scope, workoutService, $filter) {
         $scope.workouts = [];
         $scope.totalWorkouts = 0;
         $scope.filteredWorkouts = [];
         $scope.totalFilteredWorkouts = 0;
-        $scope.typeOfWorkout = ['All', 'AMRAP','EMOM', 'Power Lifting'];
-        $scope.selectedWOD = $scope.muscularGroup[0];
+        $scope.typeOfWorkout = ['All', 'AMRAP','EMOM', 'AFAP', 'PowerLifting'];
+        $scope.selectedWOD = $scope.typeOfWorkout[0];
         $scope.filterValue = '';
 
         init();

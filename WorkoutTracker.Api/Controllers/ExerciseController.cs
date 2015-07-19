@@ -25,13 +25,15 @@ namespace WorkoutTracker.Api.Controllers
             return new ExerciseDto { Id = exercise.Id, MuscularGroup = exercise.MuscularGroup, Name = exercise.Name };
         }
 
+        [Route("api/exercise")]
         public IEnumerable<ExerciseDto> Get()
         {
             return _unitOfWork.RepositoryFor<Exercise>().GetAll().Select(GetDto);
         }
 
-        
 
+
+        [Route("api/exercise/{id:int}")]
         public IHttpActionResult Get(int id)
         {
             return Ok(GetDto(_unitOfWork.RepositoryFor<Exercise>().GetById(id)));

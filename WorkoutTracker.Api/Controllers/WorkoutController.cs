@@ -5,6 +5,7 @@ using System.Linq;
 using System.Net;
 using System.Net.Http;
 using System.Web.Http;
+using WorkoutTracker.Api.Dtos;
 using WorkoutTracker.Api.Models;
 
 namespace WorkoutTracker.Api.Controllers
@@ -20,9 +21,20 @@ namespace WorkoutTracker.Api.Controllers
         }
 
         [Route("api/workout")]
-        public IEnumerable<Workout> Get()
+        public IEnumerable<WorkoutDto> Get()
         {
-            return _unitOfWork.RepositoryFor<Workout>().GetAll();
+            return _unitOfWork.RepositoryFor<Workout>().GetAll().Select(GetDto);
+        }
+
+        WorkoutDto GetDto(Workout workout)
+        {
+            return new WorkoutDto
+            {
+                Id = workout.Id,
+                Date = workout.Date,
+                Name = workout.Name,
+                WODType = workout.WODType
+            };
         }
 
         [Route("api/workout/{id:int}")]

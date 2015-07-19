@@ -1,0 +1,17 @@
+﻿using System;
+using Newtonsoft.Json;
+using Newtonsoft.Json.Converters;
+using WorkoutTracker.Api.Models;
+
+namespace WorkoutTracker.Api.Dtos
+{
+    public class WorkoutDto
+    {
+        public int Id { get; set; }
+        public string Name { get; set; }
+        public DateTime Date { get; set; }
+
+        [JsonConverter(typeof(StringEnumConverter))]
+        public WODType WODType { get; set; }
+    }
+}

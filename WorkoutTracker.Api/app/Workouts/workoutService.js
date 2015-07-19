@@ -1,7 +1,7 @@
 ﻿(function () {
     'use strict';
     app.service('workoutService', ['$http', function ($http) {
-        var urlBase = 'api/exercise';
+        var urlBase = 'api/workout';
 
         this.get = function() {
             return $http.get(urlBase);

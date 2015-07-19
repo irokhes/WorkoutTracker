@@ -8,6 +8,16 @@ namespace WorkoutTracker.Api.Models
         public int Id { get; set; }
         public string Name { get; set; }
         public DateTime Date { get; set; }
-        public virtual List<Exercise> Exercises { get; set; }
+
+        public WODType WODType { get; set; }
+        public virtual IEnumerable<Exercise> Exercises { get; set; }
+    }
+
+    public enum WODType
+    {
+       AMRAP,
+       EMOM, 
+       AFAP, 
+       PowerLifting
     }
 }

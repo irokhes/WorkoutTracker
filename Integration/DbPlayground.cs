@@ -25,7 +25,7 @@ namespace WorkoutTracker.Test.Integration
         {
             var result = _unitOfWork.RepositoryFor<Exercise>().GetAll();
 
-            Assert.AreEqual(result.Count(), 2);
+           Assert.Greater(result.Count(), 0);
         }
 
         [Test]
@@ -42,12 +42,15 @@ namespace WorkoutTracker.Test.Integration
         public void creating_a_new_workout()
         {
             var exercisesInDB = _unitOfWork.RepositoryFor<Exercise>().GetAll();
-            var exercise = exercisesInDB.First();
-            var exercises = new List<Exercise>{new Exercise{Id = exercise.Id, MuscularGroup = exercise.MuscularGroup, Name = exercise.Name}};
-            var workout = new Workout {Date = DateTime.Now, Name = "Chest workout", Exercises = exercises};
+
+            var workout = new Workout { Date = DateTime.Now, Name = "Grace", WODType = WODType.AFAP, Exercises = exercisesInDB };
+            var workout2 = new Workout {Date = DateTime.Now, Name = "Linda", WODType = WODType.AMRAP, Exercises = new List<Exercise>{exercisesInDB.First()}};
             _unitOfWork.RepositoryFor<Workout>().Insert(workout);
+            _unitOfWork.RepositoryFor<Workout>().Insert(workout2);
             _unitOfWork.Commit();
             var result = _unitOfWork.RepositoryFor<Workout>().GetById(workout.Id);
+            Assert.IsNotNull(result);
+            var result2 = _unitOfWork.RepositoryFor<Workout>().GetById(workout2.Id);
             Assert.IsNotNull(result);
         }
 
