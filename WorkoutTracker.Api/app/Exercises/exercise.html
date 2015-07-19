@@ -12,7 +12,7 @@
                     <select ng-model="selectedMuscularGroup" class="form-control" ng-options="item for item in muscularGroup"></select>
                 </div>
                 <div class="col-md-2 col-xs-4 col-sm-2">
-                    <button class="btn btn-primary pull-right" data-ng-click="doSearch()"><span class="glyphicon glyphicon-search"></span>New</button>
+                    <button class="btn btn-primary pull-right" data-ng-click="newExercise()"><span class="glyphicon glyphicon-search"></span>New</button>
                 </div>
             </div>
             <ul class="list-group" ng-repeat="exercise in filteredExercises">

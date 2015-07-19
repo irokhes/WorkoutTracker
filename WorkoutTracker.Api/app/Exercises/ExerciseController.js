@@ -18,7 +18,11 @@
 
 
         $scope.showExerciseDetails = function(id) {
-            //$location.path('/exercises/' + id);
+            $location.path('/exercises/' + id);
+        }
+
+        $scope.newExercise = function() {
+            $location.path('/exercises/new');
         }
 
         function getExercises() {

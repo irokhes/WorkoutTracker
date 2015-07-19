@@ -128,6 +128,8 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="app\app.js" />
+    <Content Include="app\Exercises\ExerciseNewController.js" />
+    <Content Include="app\Exercises\exerciseNew.html" />
     <Content Include="app\Exercises\exerciseDetail.html" />
     <Content Include="app\Exercises\exercise.html" />
     <Content Include="app\Exercises\ExerciseDetailController.js" />

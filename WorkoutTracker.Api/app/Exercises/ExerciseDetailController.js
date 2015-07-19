@@ -1,6 +1,6 @@
 ﻿(function() {
     'use strict';
-    app.controller('ExerciseDetailController', ['$scope', '$routeParams', 'exerciseService', , function ($scope, exerciseService, $routeParams) {
+    app.controller('ExerciseDetailController', ['$scope', '$routeParams', 'exerciseService', function ($scope, exerciseService, $routeParams) {
         $scope.exerciseId = $routeParams.id;
         $scope.name = '';
         $scope.description = '';
@@ -14,7 +14,7 @@
         };
 
         function getExerciseDetails() {
-            exerciseService.get().success(function (exercise) {
+            exerciseService.getDetails($scope.exerciseId).success(function (exercise) {
                 $scope.name = exercise.Name;
                 $scope.description = exercise.Description;
             })

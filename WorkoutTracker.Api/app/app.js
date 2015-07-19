@@ -8,9 +8,13 @@
             controller: "ExerciseController",
             templateUrl: "app/Exercises/exercise.html"
         })
-        .when("/exercise/:id", {
+        .when("/exercises/new", {
+            controller: "ExerciseNewController",
+            templateUrl: "app/Exercises/exerciseNew.html"
+        })
+        .when("/exercises/:id", {
             controller: "ExerciseDetailController",
-            templateUrl: "app/Exercises/detail.html"
+            templateUrl: "app/Exercises/exerciseDetail.html"
             })
         .when("/workouts", {
             controller: "WorkoutController",
