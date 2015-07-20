@@ -1,7 +1,7 @@
 ﻿var app;
 (function() {
     'use strict';
-    app = angular.module('workoutTracker', ['ngRoute', 'ui.bootstrap']);
+    app = angular.module('workoutTracker', ['ngRoute', 'ui.bootstrap', 'ui.bootstrap.datepicker']);
 
     app.config(function($routeProvider) {
         $routeProvider.when("/exercises", {
@@ -19,6 +19,10 @@
         .when("/workouts", {
             controller: "WorkoutController",
             templateUrl: "app/Workouts/workout.html"
+        })
+        .when("/workouts/new", {
+            controller: "NewWorkoutController",
+            templateUrl: "app/Workouts/newWorkout.html"
         })
         .otherwise({ redirectTo: '/exercises' });
     });

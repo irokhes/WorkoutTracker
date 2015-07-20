@@ -1,6 +1,6 @@
 ﻿(function() {
     'use strict';
-    app.controller('WorkoutController', ['$scope', 'workoutService', '$filter', function($scope, workoutService, $filter) {
+    app.controller('WorkoutController', ['$scope','$location', 'workoutService', '$filter', function($scope, $location, workoutService, $filter) {
         $scope.workouts = [];
         $scope.totalWorkouts = 0;
         $scope.filteredWorkouts = [];
@@ -14,6 +14,10 @@
         function init() {
             getWorkouts();
         };
+
+        $scope.newWorkout = function () {
+            $location.path('/workouts/new');
+        }
 
         $scope.filter = function() {
             filterWorkouts();
