@@ -12,8 +12,11 @@
         init();
 
         function init() {
-            createWatch();
             getWorkouts();
+        };
+
+        $scope.filter = function() {
+            filterWorkouts();
         };
 
         function getWorkouts() {
@@ -27,20 +30,11 @@
             });
         }
 
-        function filterWorkouts(filterValue, muscularGroup) {
-            $scope.filteredWorkouts = $filter('workoutsFilter')($scope.workouts, filterValue, muscularGroup);
+        function filterWorkouts() {
+            $scope.filteredWorkouts = $filter('workoutsFilter')($scope.workouts, $scope.filterValue, $scope.selectedWOD);
             $scope.totalFilteredWorkouts = $scope.filteredWorkouts.length;
         };
 
-        function createWatch() {
-
-            $scope.$watch("filterValue", function (filterValue) {
-                filterWorkouts(filterValue, $scope.selectedWOD);
-            });
-
-            $scope.$watch("selectedWOD", function (selectedWOD) {
-                filterWorkouts($scope.filterValue, selectedWOD);
-            });
-        }
+        
     }]);
 })();

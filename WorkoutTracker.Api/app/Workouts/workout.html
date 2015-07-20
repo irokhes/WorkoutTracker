@@ -4,10 +4,10 @@
 
         <div class="form-group">
             <div class="col-md-5">
-                <input type="text" ng-model="filterValue" class="form-control" placeholder="Filter Workouts by (Name) or (Type)" />
+                <input type="text" ng-model="filterValue" ng-change="filter()" class="form-control" placeholder="Filter Workouts by (Name) or (Type)" />
             </div>
             <div class="col-md-2">
-                <select ng-model="selectedWOD" class="form-control" ng-options="item for item in typeOfWorkout"></select>
+                <select ng-model="selectedWOD" ng-change="filter()" class="form-control" ng-options="item for item in typeOfWorkout"></select>
             </div>
             <div class="col-md-2 col-xs-4 col-sm-2">
                 <button class="btn btn-primary pull-right" data-ng-click="doSearch()"><span class="glyphicon glyphicon-search"></span>New</button>

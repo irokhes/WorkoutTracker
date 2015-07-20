@@ -9,7 +9,7 @@
 
         this.getDetails = function(id) {
             return $http.get(urlBase + '/' + id);
-        }
+        };
 
     }]);
 })();

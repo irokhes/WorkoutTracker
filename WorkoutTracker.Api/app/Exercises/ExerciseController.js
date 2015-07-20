@@ -12,7 +12,6 @@
         init();
 
         function init() {
-            createWatch();
             getExercises();
         };
 
@@ -25,11 +24,20 @@
             $location.path('/exercises/new');
         }
 
+        $scope.filter = function () {
+            filterExercises();
+        };
+
+        function filterExercises() {
+            $scope.filteredExercises = $filter('exercisesFilter')($scope.exercices, $scope.filterValue, $scope.selectedMuscularGroup);
+            $scope.totalFilteredExercises = $scope.filteredExercises.length;
+        }
+
         function getExercises() {
             exerciseService.get().success(function (exercises) {
                 $scope.exercices = exercises;
                 $scope.totalExercises = $scope.exercices.length;
-                filterExercises('', 'All');
+                filterExercises();
                 })
             .error(function (error) {
                 $scope.status = 'Unable to load exercises: ' + error.message;
@@ -38,21 +46,8 @@
 
 
 
-        function filterExercises(filterValue, muscularGroup) {
-            $scope.filteredExercises = $filter('exercisesFilter')($scope.exercices, filterValue, muscularGroup);
-            $scope.totalFilteredExercises = $scope.filteredExercises.length;
-        };
+        
 
-        function createWatch() {
-
-            $scope.$watch("filterValue", function (filterValue) {
-                filterExercises(filterValue, $scope.selectedMuscularGroup);
-            });
-
-            $scope.$watch("selectedMuscularGroup", function (selectedMuscularGroup) {
-                filterExercises($scope.filterValue, selectedMuscularGroup);
-            });
-        }
-
+ 
     }]);
 })();
