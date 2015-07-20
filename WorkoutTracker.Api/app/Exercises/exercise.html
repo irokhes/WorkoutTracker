@@ -6,13 +6,13 @@
         <div ng-show="totalExercises > 0">
             <div class="form-group">
                 <div class="col-md-5">
-                    <input type="text" ng-model="filterValue" ng-change="filterExercises()" class="form-control" placeholder="Filter Exercises by (Name) or (Muscle Group)" />
+                    <input type="text" ng-model="filterValue" ng-change="filter()" class="form-control" placeholder="Filter Exercises by (Name) or (Muscle Group)" />
                 </div>
                 <div class="col-md-5">
                     <select ng-model="selectedMuscularGroup" ng-change="filter()" class="form-control" ng-options="item for item in muscularGroup"></select>
                 </div>
                 <div class="col-md-2 col-xs-4 col-sm-2">
-                    <button class="btn btn-primary pull-right" data-ng-click="newExercise()"><span class="glyphicon glyphicon-search"></span>New</button>
+                    <button class="btn btn-primary pull-right" data-ng-click="newExercise()"><span class="glyphicon glyphicon-plus"></span>New</button>
                 </div>
             </div>
             <ul class="list-group" ng-repeat="exercise in filteredExercises">
@@ -22,6 +22,7 @@
                             <a href="" ng-click="showExerciseDetails(exercise.Id)">
                                 <h2>{{exercise.Name}}</h2>
                             </a>
+                            <span>{{exercise.Description}}</span>
                         </div>
                         <div class="col-xs-4 col-md-3">
                             <div>{{exercise.MuscularGroup}}</div>

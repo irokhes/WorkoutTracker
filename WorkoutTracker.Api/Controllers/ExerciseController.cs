@@ -41,12 +41,13 @@ namespace WorkoutTracker.Api.Controllers
         }
 
         [HttpPost]
-        public IHttpActionResult Post([FromBody]Exercise newExercise)
+        [Route("api/exercise")]
+        public IHttpActionResult Post(Exercise newExercise)
         {
             if (!ModelState.IsValid)
                 return BadRequest(ModelState);
             _unitOfWork.RepositoryFor<Exercise>().Insert(newExercise);
-
+            _unitOfWork.Commit();
             return Created(Request.RequestUri + newExercise.Id.ToString(CultureInfo.InvariantCulture), newExercise);
     
         }
