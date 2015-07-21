@@ -20,9 +20,13 @@
             controller: "WorkoutController",
             templateUrl: "app/Workouts/workout.html"
         })
-        .when("/workouts/new", {
-            controller: "NewWorkoutController",
-            templateUrl: "app/Workouts/newWorkout.html"
+        .when("/workouts/edit", {
+                controller: "EditWorkoutController",
+                templateUrl: "app/Workouts/editWorkout.html"
+            })
+        .when("/workouts/edit/:id", {
+            controller: "EditWorkoutController",
+            templateUrl: "app/Workouts/editWorkout.html"
         })
         .otherwise({ redirectTo: '/exercises' });
     });

@@ -16,7 +16,15 @@
         };
 
         $scope.newWorkout = function () {
-            $location.path('/workouts/new');
+            $location.path('/workouts/edit/');
+        }
+
+        $scope.edit = function (id) {
+            $location.path('/workouts/edit/' + id);
+        }
+
+        $scope.delete = function () {
+            
         }
 
         $scope.filter = function() {
@@ -24,7 +32,7 @@
         };
 
         function getWorkouts() {
-            workoutService.get().success(function (workouts) {
+            workoutService.getAll().success(function (workouts) {
                 $scope.workouts = workouts;
                 $scope.totalWorkouts = $scope.workouts.length;
                 filterWorkouts('', 'All');

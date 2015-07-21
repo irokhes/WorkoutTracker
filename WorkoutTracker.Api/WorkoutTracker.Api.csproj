@@ -138,8 +138,8 @@
     <Content Include="app\Filters\workoutsFilter.js" />
     <Content Include="app\Filters\exercisesFilter.js" />
     <Content Include="app\Navigation\NavigationController.js" />
-    <Content Include="app\Workouts\NewWorkoutController.js" />
-    <Content Include="app\Workouts\newWorkout.html" />
+    <Content Include="app\Workouts\EditWorkoutController.js" />
+    <Content Include="app\Workouts\editWorkout.html" />
     <Content Include="app\Workouts\workout.html" />
     <Content Include="app\Workouts\WorkoutController.js" />
     <Content Include="app\Workouts\workoutService.js" />

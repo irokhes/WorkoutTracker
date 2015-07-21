@@ -31,8 +31,9 @@ namespace WorkoutTracker.Api.Controllers
             return new WorkoutDto
             {
                 Id = workout.Id,
-                Date = workout.Date,
                 Name = workout.Name,
+                Description = workout.Description,
+                Date = workout.Date,
                 WODType = workout.WODType
             };
         }
@@ -40,7 +41,7 @@ namespace WorkoutTracker.Api.Controllers
         [Route("api/workout/{id:int}")]
         public IHttpActionResult Get(int id)
         {
-            return Ok(_unitOfWork.RepositoryFor<Workout>().GetById(id));
+            return Ok(GetDto(_unitOfWork.RepositoryFor<Workout>().GetById(id)));
         }
 
         [Route("api/workout")]
@@ -63,6 +64,7 @@ namespace WorkoutTracker.Api.Controllers
             if (!ModelState.IsValid)
                 return BadRequest(ModelState);
             _unitOfWork.RepositoryFor<Workout>().Update(workout);
+            _unitOfWork.Commit();
             return Content(HttpStatusCode.Accepted, workout);
         }
     }

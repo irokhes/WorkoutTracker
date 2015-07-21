@@ -1,6 +1,6 @@
 ﻿<div class="col-xs-12 col-sm-12 col-md-offset-2 col-md-8 col-md-offset-2">
     <form class="form-horizontal">
-        
+
 
         <div class="form-group">
             <div class="col-md-5">
@@ -16,27 +16,34 @@
         <div class="well well-sm" ng-show="totalWorkouts == 0">
             <h5>No Workouts found</h5>
         </div>
+
         <div ng-show="totalWorkouts > 0">
-            <ul class="list-group" ng-repeat="workout in filteredWorkouts">
-                <li class="list-group-item">
-                    <div class="row">
-                        <div class="col-xs-8 col-md-8">
+            <table class="table table-condensed">
+                <thead>
+                    <tr>
+                        <th>Name</th>
+                        <th>Date</th>
+                        <th>Actions</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr ng-repeat="workout in filteredWorkouts">
+                        <td>
                             <a href="" ng-click="showWorkoutDetails(workout.Id)">
-                                <h2>{{workout.Name}}</h2>
+                                <span>{{workout.Name}}</span>
                             </a>
-                        </div>
-                        <div class="col-xs-4 col-md-3">
-                            <div>{{workout.Date | date:'dd-MM-yyyy'}}</div>
-                        </div>
-                    </div>
-                    <div class="row">
-                        <div class="col-xs-2 col-md-1">
+                        </td>
+                        <td>{{workout.Date | date:'dd-MM-yyyy'}}</td>
+                        <td>
+                            <div class="btn-group btn-group-sm">
+                                <button class="btn-group" data-ng-click="edit(workout.Id)"><span class="glyphicon glyphicon-pencil"></span></button>
+                                <button class="btn-group" data-ng-click="delete(workout.Id)"><span class="glyphicon glyphicon-remove"></span></button>
+                            </div>
+                        </td>
 
-                        </div>
-                    </div>
-
-                </li>
-            </ul>
+                    </tr>
+                </tbody>
+            </table>
         </div>
 
         <div class="row">
