@@ -7,5 +7,9 @@
             return $http.get(urlBase);
         };
 
+        this.save = function(workout) {
+            return $http.post(urlBase, workout);
+        }
+
     }]);
 })();
