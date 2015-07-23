@@ -9,6 +9,8 @@
         $scope.typeOfWorkout = ['AMRAP', 'EMOM', 'AFAP', 'PowerLifting'];
         $scope.workout.selectedWOD = $scope.typeOfWorkout[0];
 
+        $scope.exercises = ['Power clean', 'Thruster', 'Snatch clean'];
+
         $scope.save = function () {
             if ($scope.workout.id !== 'undefined' && $scope.workout.id !== 0) {
                 workoutService.update($scope.workout.id, toDto())
