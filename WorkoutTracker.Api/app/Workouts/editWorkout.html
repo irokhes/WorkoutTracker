@@ -32,7 +32,7 @@
         <div class="form-group col-lg-4">
             <label for="inputNewExerciseName" class="sr-only">Exercise Name</label>
             <div>
-                <input type="text" id="inputNewExerciseName" class="form-control" placeholder="Search for an exercise" ng-model="workout.newExercise.Name" typeahead="exercise for exercise in exercises | filter:$viewValue | limitTo:3">
+                <input type="text" id="inputNewExerciseName" class="form-control" placeholder="Search for an exercise" ng-change="onChange()" ng-model="workout.newExercise.name" typeahead="exercise for exercise in exercises | filter:$viewValue | limitTo:3" typeahead-on-select='onSelect($item)'>
             </div>
         </div>
         <div class="form-group col-lg-2">
@@ -48,7 +48,7 @@
             </div>
         </div>
 
-        <button type="button" ng-click="save()" class="btn"><span class="glyphicon glyphicon-plus"></span>&nbsp;Add Exercise</button>
+        <button type="button" ng-disabled="!isExerciseSelected" ng-click="save()" class="btn"><span class="glyphicon glyphicon-plus"></span>&nbsp;Add Exercise</button>
     </div>
     <div class="form-group">
         <div class="col-sm-offset-2 col-sm-8">

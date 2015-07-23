@@ -10,6 +10,19 @@
         $scope.workout.selectedWOD = $scope.typeOfWorkout[0];
 
         $scope.exercises = ['Power clean', 'Thruster', 'Snatch clean'];
+        $scope.isExerciseSelected = false;
+
+        $scope.onSelect = function ($item) {
+            //mark the object as selected
+            $scope.isExerciseSelected = true;
+        };
+
+        $scope.onChange = function() {
+            if ($scope.isExerciseSelected) {
+                alert($scope.workout.newExercise.name);
+                $scope.isExerciseSelected = false;
+            }
+        }
 
         $scope.save = function () {
             if ($scope.workout.id !== 'undefined' && $scope.workout.id !== 0) {
@@ -56,11 +69,6 @@
             $scope.workout.dt = null;
         };
 
-        // Disable weekend selection
-        $scope.disabled = function (date, mode) {
-            return (mode === 'day' && (date.getDay() === 0 || date.getDay() === 6));
-        };
-
         $scope.toggleMin = function () {
             $scope.minDate = $scope.minDate ? null : new Date();
         };
@@ -80,39 +88,6 @@
 
         $scope.formats = ['dd-MMMM-yyyy', 'yyyy/MM/dd', 'dd.MM.yyyy', 'shortDate'];
         $scope.format = $scope.formats[0];
-
-        var tomorrow = new Date();
-        tomorrow.setDate(tomorrow.getDate() + 1);
-        var afterTomorrow = new Date();
-        afterTomorrow.setDate(tomorrow.getDate() + 2);
-        $scope.events =
-          [
-            {
-                date: tomorrow,
-                status: 'full'
-            },
-            {
-                date: afterTomorrow,
-                status: 'partially'
-            }
-          ];
-
-        $scope.getDayClass = function (date, mode) {
-            if (mode === 'day') {
-                var dayToCheck = new Date(date).setHours(0, 0, 0, 0);
-
-                for (var i = 0; i < $scope.events.length; i++) {
-                    var currentDay = new Date($scope.events[i].date).setHours(0, 0, 0, 0);
-
-                    if (dayToCheck === currentDay) {
-                        return $scope.events[i].status;
-                    }
-                }
-            }
-
-            return '';
-        };
-
         //End calendar code
 
         init();
