@@ -1,4 +1,5 @@
-﻿using Newtonsoft.Json;
+﻿using System.Collections.Generic;
+using Newtonsoft.Json;
 using Newtonsoft.Json.Converters;
 
 namespace WorkoutTracker.Api.Models
@@ -11,6 +12,9 @@ namespace WorkoutTracker.Api.Models
         public string Description { get; set; }
 
         public MuscularGroup MuscularGroup { get; set; }
+
+        public virtual ICollection<WorkoutExercise> WorkoutsExercises { get; set; }
+
     }
 
 

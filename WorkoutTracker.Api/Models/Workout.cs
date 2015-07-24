@@ -11,10 +11,10 @@ namespace WorkoutTracker.Api.Models
         public string Description { get; set; }
         public DateTime Date { get; set; }
 
-        public TimeSpan EndTime { get; set; }
+        public TimeSpan Time { get; set; }
 
         public WODType WODType { get; set; }
-        public virtual IEnumerable<Exercise> Exercises { get; set; }
+        public virtual ICollection<WorkoutExercise> WorkoutExercises { get; set; }
     }
 
     public enum WODType

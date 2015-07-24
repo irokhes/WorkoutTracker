@@ -171,8 +171,10 @@
     <Compile Include="App_Start\WebApiConfig.cs" />
     <Compile Include="Controllers\WorkoutController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
+    <Compile Include="Dtos\DtoMapper.cs" />
     <Compile Include="Dtos\ExerciseDto.cs" />
     <Compile Include="Dtos\WorkoutDto.cs" />
+    <Compile Include="Models\WorkoutExercise.cs" />
     <Compile Include="Models\Exercise.cs" />
     <Compile Include="Controllers\ExerciseController.cs" />
     <Compile Include="Global.asax.cs">

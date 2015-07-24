@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Converters;
 using WorkoutTracker.Api.Models;
@@ -14,5 +15,14 @@ namespace WorkoutTracker.Api.Dtos
 
         [JsonConverter(typeof(StringEnumConverter))]
         public WODType WODType { get; set; }
+
+        public List<WorkoutExerciseDto> Exercises { get; set; }
+    }
+
+    public class WorkoutExerciseDto
+    {
+        public  string Name { get; set; }
+        public  int NumReps { get; set; }
+        public  decimal WeightOrDistance { get; set; }
     }
 }

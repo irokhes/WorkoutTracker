@@ -23,25 +23,18 @@ namespace WorkoutTracker.Api.Controllers
         [Route("api/workout")]
         public IEnumerable<WorkoutDto> Get()
         {
-            return _unitOfWork.RepositoryFor<Workout>().GetAll().Select(GetDto);
+            return _unitOfWork.RepositoryFor<Workout>().GetAll().Select(DtoMapper.GetWorkoutDto);
         }
 
-        WorkoutDto GetDto(Workout workout)
-        {
-            return new WorkoutDto
-            {
-                Id = workout.Id,
-                Name = workout.Name,
-                Description = workout.Description,
-                Date = workout.Date,
-                WODType = workout.WODType
-            };
-        }
+        
 
         [Route("api/workout/{id:int}")]
         public IHttpActionResult Get(int id)
         {
-            return Ok(GetDto(_unitOfWork.RepositoryFor<Workout>().GetById(id)));
+            Workout workout = _unitOfWork.RepositoryFor<Workout>().GetById(id);
+            WorkoutDto workoutDto = DtoMapper.GetWorkoutDto(workout);
+            workoutDto.Exercises = workout.WorkoutExercises.Select(DtoMapper.GetWorkoutExerciseDto).ToList();
+            return Ok(workoutDto);
         }
 
         [Route("api/workout")]

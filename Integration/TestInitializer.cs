@@ -12,12 +12,16 @@ namespace WorkoutTracker.Test.Integration
         {
            context.Exercises.AddOrUpdate(
                                 c => c.Id,
-                                new Exercise { Name = "Pull Ups", 
-                                    Description = "The pull up is perhaps the best exercise you can do if you want to build a strong, lean upper body. All you need is a bar that will support your weight.", 
+                                new Exercise
+                                {
+                                    Name = "Wall balls",
+                                    Description = " Is a compound exercise which combines a front squat with a medicine ball and a push press-like throwing of the ball to a target located some distance above the exerciser.", 
                                     MuscularGroup = MuscularGroup.Back },
-                                new Exercise { Name = "Bench Press", 
-                                    Description = "A lift in weightlifting that is executed from a usually horizontal position on a bench, in which the weight is lifted from the chest to arm's length and then lowered back to the chest.", 
-                                    MuscularGroup = MuscularGroup.Chest });
+                                new Exercise
+                                {
+                                    Name = "Thruster",
+                                    Description = "The Thruster is a powerful movement that moves a weight through a large range of motion. This movement simply combines a front squat with a push press.", 
+                                    MuscularGroup = MuscularGroup.Legs });
  
             base.Seed(context);
         }
@@ -30,8 +34,8 @@ namespace WorkoutTracker.Test.Integration
         [SetUp]
         public void SetUp()
         {
+            Database.Delete(ConfigurationManager.ConnectionStrings["workoutConnectionString"].ConnectionString);
             Database.SetInitializer(new TestInitializer());
-
             context = new WorkoutTrackerContext();
             context.Database.Initialize(true);
         }
@@ -39,7 +43,7 @@ namespace WorkoutTracker.Test.Integration
         [TearDown]
         public void TearDown()
         {
-            Database.Delete(ConfigurationManager.ConnectionStrings["workoutConnectionString"].ConnectionString);
+            
         }
     }
 

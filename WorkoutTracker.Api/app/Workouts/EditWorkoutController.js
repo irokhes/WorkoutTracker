@@ -1,27 +1,56 @@
 ﻿(function () {
     'use strict';
-    app.controller('EditWorkoutController', ['$scope', '$location', '$routeParams', 'workoutService', function ($scope, $location, $routeParams, workoutService) {
+    app.controller('EditWorkoutController', ['$scope', '$location', '$routeParams', 'workoutService', 'exerciseService', function ($scope, $location, $routeParams, workoutService, exerciseService) {
 
 
         $scope.workout = {};
-        $scope.workout.name = '';
-        $scope.workout.description = '';
-        $scope.typeOfWorkout = ['AMRAP', 'EMOM', 'AFAP', 'PowerLifting'];
-        $scope.workout.selectedWOD = $scope.typeOfWorkout[0];
+        $scope.newExercise = {};
 
-        $scope.exercises = ['Power clean', 'Thruster', 'Snatch clean'];
+        $scope.typeOfWorkout = ['AMRAP', 'EMOM', 'AFAP', 'PowerLifting'];
+        $scope.workout.wodType = $scope.typeOfWorkout[0];
+
+        $scope.exercises = {};
+        $scope.selectedExercise = '';
         $scope.isExerciseSelected = false;
 
-        $scope.onSelect = function ($item) {
-            //mark the object as selected
-            $scope.isExerciseSelected = true;
+        function init() {
+            if ($routeParams.id === 'undefined') {
+                return;
+            }
+            $scope.workout.id = $routeParams.id;
+            workoutService.get($scope.workout.id).then(function (workout) {
+                $scope.workout = workout.data;
+                $scope.workout.dt = workout.data.date;
+                return exerciseService.get();
+            }).then(function (exercises) {
+                $scope.exercises = exercises.data;
+            }).catch(function (error) {
+                $scope.status = 'Unable to load exercises: ' + error;
+                console.error('Unable to load exercises: ' + error);
+            });
+
         };
 
-        $scope.onChange = function() {
+        $scope.onSelect = function ($item) {
+            $scope.isExerciseSelected = true;
+            console.info('exercise selected: ' + $item);
+            $scope.newExercise = $item;
+        };
+
+        $scope.onChange = function () {
             if ($scope.isExerciseSelected) {
-                alert($scope.workout.newExercise.name);
                 $scope.isExerciseSelected = false;
             }
+        }
+        $scope.addExercise = function() {
+            $scope.workout.exercises.push({ name: $scope.newExercise.name, numReps: $scope.newExercise.Reps, weightOrDistance: $scope.newExercise.weightOrDistance });
+            resetNewExercise();
+        };
+
+        function resetNewExercise() {
+            $scope.newExercise = {};
+            $scope.selectedExercise = '';
+            $scope.isExerciseSelected = false;
         }
 
         $scope.save = function () {
@@ -34,7 +63,7 @@
                         $scope.status = 'Unable to load exercises: ' + error.message;
                         console.error('Unable to load exercises: ' + error.message);
                     });
-                
+
             } else {
                 workoutService.save(toDto())
                     .success(function (data) {
@@ -45,7 +74,7 @@
                         console.error('Unable to load exercises: ' + error.message);
                     });
             }
-            
+
         }
 
         function toDto() {
@@ -58,6 +87,7 @@
             }
         }
 
+        //TODO move to directive
         //Begin Calendar code
 
         $scope.today = function () {
@@ -92,30 +122,6 @@
 
         init();
 
-        function init() {
-            if ($routeParams.id === 'undefined') {
-                return;
-            }
-            $scope.workout.id = $routeParams.id;
-            workoutService.get($scope.workout.id).success(function (workout) {
-                $scope.workout.name = workout.Name;
-                $scope.workout.description = workout.Description;
-                $scope.workout.dt = workout.Date;
-                $scope.workout.selectedWOD = workout.WODType;
-            })
-            .error(function (error) {
-                $scope.status = 'Unable to load exercises: ' + error.message;
-                console.error('Unable to load exercises: ' + error.message);
-            });
-
-        };
-
-
-
-
-
-
-
-
+        
     }]);
 })();
