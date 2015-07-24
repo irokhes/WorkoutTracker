@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Linq;
 using NUnit.Framework;
 using WorkoutTracker.Api;
@@ -46,16 +47,23 @@ namespace WorkoutTracker.Test.Integration
         public void creating_a_new_workout()
         {
             var exercisesInDB = _unitOfWork.RepositoryFor<Exercise>().GetAll();
-            var workout = new Workout { Date = DateTime.Now, Name = "Holleyman 2.0", WODType = WODType.AFAP };
-            var workout2 = new Workout {Date = DateTime.Now, Name = "Wod 22-7-15", WODType = WODType.AMRAP};
+            var workout = new Workout { 
+                Date = DateTime.Now, 
+                Name = "Holleyman 2.0", 
+                WODType = WODType.AFAP,  
+                WorkoutExercises = exercisesInDB
+                .Select(x => new WorkoutExercise{ Exercise = x, NumReps = 3, WeightOrDistance = 20}).ToList()};
+            var workout2 = new Workout
+            {
+                Date = DateTime.Now,
+                Name = "Wod 22-7-15",
+                WODType = WODType.AMRAP,
+                WorkoutExercises = exercisesInDB
+                    .Select(x => new WorkoutExercise { Exercise = x, NumReps = 5, WeightOrDistance = 10 }).ToList()
+            };
             _unitOfWork.RepositoryFor<Workout>().Insert(workout);
             _unitOfWork.RepositoryFor<Workout>().Insert(workout2);
 
-            foreach (var exercise in exercisesInDB)
-            {
-                _unitOfWork.RepositoryFor<WorkoutExercise>().Insert(new WorkoutExercise {Exercise = exercise, Workout = workout, NumReps = 3});
-                _unitOfWork.RepositoryFor<WorkoutExercise>().Insert(new WorkoutExercise { ExerciseId = exercise.Id, Workout = workout2, NumReps = 5 });
-            }
             _unitOfWork.Commit();
             var result = _unitOfWork.RepositoryFor<Workout>().GetById(workout.Id);
             Assert.Greater(result.WorkoutExercises.Count, 0);

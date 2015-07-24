@@ -29,5 +29,15 @@ namespace WorkoutTracker.Api.Dtos
                 WeightOrDistance = workoutExercise.WeightOrDistance
             };
         }
+
+        public static Workout GetWorkout(WorkoutDto newWorkout)
+        {
+            return new Workout
+            {
+                Name = newWorkout.Name,
+                Description = newWorkout.Description,
+                WODType = newWorkout.WODType,
+            };
+        }
     }
 }

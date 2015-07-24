@@ -39,11 +39,11 @@ namespace WorkoutTracker.Api.Controllers
 
         [Route("api/workout")]
         [HttpPost]
-        public IHttpActionResult Post(Workout newWorkout)
+        public IHttpActionResult Post(WorkoutDto newWorkout)
         {
             if (!ModelState.IsValid)
                 return BadRequest(ModelState);
-            _unitOfWork.RepositoryFor<Workout>().Insert(newWorkout);
+            _unitOfWork.RepositoryFor<Workout>().Insert(DtoMapper.GetWorkout(newWorkout));
             _unitOfWork.Commit();
             return Created(Request.RequestUri + newWorkout.Id.ToString(), newWorkout);
     
