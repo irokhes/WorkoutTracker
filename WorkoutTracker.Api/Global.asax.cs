@@ -14,6 +14,8 @@ namespace WorkoutTracker.Api
             settings.Formatting = Formatting.Indented;
             settings.ContractResolver = new CamelCasePropertyNamesContractResolver();
 
+            AutoMapperWebConfiguration.Configure();
+
             GlobalConfiguration.Configure(WebApiConfig.Register);
         }
     }

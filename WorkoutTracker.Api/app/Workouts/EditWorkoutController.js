@@ -42,8 +42,8 @@
                 $scope.isExerciseSelected = false;
             }
         }
-        $scope.addExercise = function() {
-            $scope.workout.exercises.push({ name: $scope.newExercise.name, numReps: $scope.newExercise.Reps, weightOrDistance: $scope.newExercise.weightOrDistance });
+        $scope.addExercise = function () {
+            $scope.workout.exercises.push({ exerciseId: $scope.newExercise.id, name: $scope.newExercise.name, numReps: $scope.newExercise.Reps, weightOrDistance: $scope.newExercise.weightOrDistance });
             resetNewExercise();
         };
 
@@ -82,7 +82,8 @@
                 Id: $scope.workout.id,
                 Name: $scope.workout.name,
                 Description: $scope.workout.description,
-                MuscularGroup: $scope.workout.selectedWOD,
+                Exercises: $scope.workout.exercises,
+                WODType: $scope.workout.selectedWOD,
                 Date: $scope.workout.dt
             }
         }

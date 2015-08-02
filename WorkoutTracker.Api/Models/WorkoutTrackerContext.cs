@@ -1,5 +1,7 @@
 using System.Configuration;
 using System.Data.Entity;
+using System.Linq;
+using System.Web;
 
 namespace WorkoutTracker.Api.Models
 {
@@ -26,7 +28,7 @@ namespace WorkoutTracker.Api.Models
                 .HasForeignKey(x => x.ExerciseId);
 
             modelBuilder.Entity<Workout>()
-                .HasMany(x => x.WorkoutExercises)
+                .HasMany(x => x.Exercises)
                 .WithRequired(y => y.Workout)
                 .HasForeignKey(x => x.WorkoutId);
         } 

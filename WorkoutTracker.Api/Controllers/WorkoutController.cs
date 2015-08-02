@@ -5,6 +5,7 @@ using System.Linq;
 using System.Net;
 using System.Net.Http;
 using System.Web.Http;
+using AutoMapper;
 using WorkoutTracker.Api.Dtos;
 using WorkoutTracker.Api.Models;
 
@@ -23,7 +24,7 @@ namespace WorkoutTracker.Api.Controllers
         [Route("api/workout")]
         public IEnumerable<WorkoutDto> Get()
         {
-            return _unitOfWork.RepositoryFor<Workout>().GetAll().Select(DtoMapper.GetWorkoutDto);
+            return Mapper.Map<List<Workout>, List<WorkoutDto>>(_unitOfWork.RepositoryFor<Workout>().GetAll().ToList());
         }
 
         
@@ -31,9 +32,8 @@ namespace WorkoutTracker.Api.Controllers
         [Route("api/workout/{id:int}")]
         public IHttpActionResult Get(int id)
         {
-            Workout workout = _unitOfWork.RepositoryFor<Workout>().GetById(id);
-            WorkoutDto workoutDto = DtoMapper.GetWorkoutDto(workout);
-            workoutDto.Exercises = workout.WorkoutExercises.Select(DtoMapper.GetWorkoutExerciseDto).ToList();
+            var workout = _unitOfWork.RepositoryFor<Workout>().GetById(id);
+            var workoutDto = Mapper.Map<Workout, WorkoutDto>(workout);
             return Ok(workoutDto);
         }
 
@@ -43,20 +43,21 @@ namespace WorkoutTracker.Api.Controllers
         {
             if (!ModelState.IsValid)
                 return BadRequest(ModelState);
-            _unitOfWork.RepositoryFor<Workout>().Insert(DtoMapper.GetWorkout(newWorkout));
+            _unitOfWork.RepositoryFor<Workout>().Insert(Mapper.Map<WorkoutDto, Workout>(newWorkout));
             _unitOfWork.Commit();
-            return Created(Request.RequestUri + newWorkout.Id.ToString(), newWorkout);
+            return Created(Request.RequestUri + newWorkout.Id.ToString(CultureInfo.InvariantCulture), newWorkout);
     
         }
 
 
         [Route("api/workout/{id:int}")]
         [HttpPut]
-        public IHttpActionResult Update(int id, Workout workout)
+        public IHttpActionResult Update(int id, WorkoutDto workout)
         {
             if (!ModelState.IsValid)
                 return BadRequest(ModelState);
-            _unitOfWork.RepositoryFor<Workout>().Update(workout);
+            var oldEntity = _unitOfWork.RepositoryFor<Workout>().GetById(id);
+            Mapper.Map<WorkoutDto, Workout>(workout,oldEntity);
             _unitOfWork.Commit();
             return Content(HttpStatusCode.Accepted, workout);
         }

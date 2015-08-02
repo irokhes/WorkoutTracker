@@ -51,14 +51,14 @@ namespace WorkoutTracker.Test.Integration
                 Date = DateTime.Now, 
                 Name = "Holleyman 2.0", 
                 WODType = WODType.AFAP,  
-                WorkoutExercises = exercisesInDB
+                Exercises = exercisesInDB
                 .Select(x => new WorkoutExercise{ Exercise = x, NumReps = 3, WeightOrDistance = 20}).ToList()};
             var workout2 = new Workout
             {
                 Date = DateTime.Now,
                 Name = "Wod 22-7-15",
                 WODType = WODType.AMRAP,
-                WorkoutExercises = exercisesInDB
+                Exercises = exercisesInDB
                     .Select(x => new WorkoutExercise { Exercise = x, NumReps = 5, WeightOrDistance = 10 }).ToList()
             };
             _unitOfWork.RepositoryFor<Workout>().Insert(workout);
@@ -66,9 +66,9 @@ namespace WorkoutTracker.Test.Integration
 
             _unitOfWork.Commit();
             var result = _unitOfWork.RepositoryFor<Workout>().GetById(workout.Id);
-            Assert.Greater(result.WorkoutExercises.Count, 0);
+            Assert.Greater(result.Exercises.Count, 0);
             var result2 = _unitOfWork.RepositoryFor<Workout>().GetById(workout2.Id);
-            Assert.Greater(result2.WorkoutExercises.Count, 0);
+            Assert.Greater(result2.Exercises.Count, 0);
 
         }
 

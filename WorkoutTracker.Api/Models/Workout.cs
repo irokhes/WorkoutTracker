@@ -5,16 +5,16 @@ namespace WorkoutTracker.Api.Models
 {
     public class Workout
     {
-        public int Id { get; set; }
-        public string Name { get; set; }
+        public virtual int Id { get; set; }
+        public virtual string Name { get; set; }
 
-        public string Description { get; set; }
-        public DateTime Date { get; set; }
+        public virtual string Description { get; set; }
+        public virtual DateTime Date { get; set; }
 
-        public TimeSpan Time { get; set; }
+        public virtual TimeSpan Time { get; set; }
 
-        public WODType WODType { get; set; }
-        public virtual ICollection<WorkoutExercise> WorkoutExercises { get; set; }
+        public virtual WODType WODType { get; set; }
+        public virtual ICollection<WorkoutExercise> Exercises { get; set; }
     }
 
     public enum WODType
