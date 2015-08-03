@@ -17,15 +17,12 @@
             </div>
             <ul class="list-group" ng-repeat="exercise in filteredExercises">
                 <li class="list-group-item">
-                    <div class="row">
-                        <div class="col-xs-8 col-md-8">
+                    <div class="row vertical-align">
+                        <div class="col-xs-12 col-md-12">
                             <a href="" ng-click="showExerciseDetails(exercise.id)">
                                 <h2>{{exercise.name}}</h2>
                             </a>
                             <span>{{exercise.description}}</span>
-                        </div>
-                        <div class="col-xs-4 col-md-3">
-                            <div>{{exercise.muscularGroup}}</div>
                         </div>
                     </div>
                     <div class="row">
