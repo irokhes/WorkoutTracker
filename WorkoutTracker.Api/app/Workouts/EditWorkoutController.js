@@ -47,6 +47,11 @@
             resetNewExercise();
         };
 
+        $scope.deleteExercise = function(exercise) {
+            var index = $scope.workout.exercises.indexOf(exercise);
+            $scope.workout.exercises.splice(index, 1);
+        }
+
         function resetNewExercise() {
             $scope.newExercise = {};
             $scope.selectedExercise = '';

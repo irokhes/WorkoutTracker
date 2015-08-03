@@ -29,8 +29,15 @@
         </div>
     </div>
     <div class="form-group">
+        <label for="image" class="col-sm-2 control-label">Picture of results</label>
+        <div class="col-sm-8">
+            <span>Image goes here..</span>
+
+        </div>
+    </div>
+    <div class="form-group">
         <label class="col-sm-2 control-label">Exercises</label>
-        <div class="row col-sm-8">
+        <div class="col-sm-8">
 
             <table class="table table-condensed">
                 <thead>
@@ -51,7 +58,11 @@
                                 <span>{{exercise.weightOrDistance}}</span>
                             </div>
                         </td>
-
+                        <td>
+                            <button class="btn-group" data-ng-click="deleteExercise(exercise)">
+                                <span class="glyphicon glyphicon-remove"></span>
+                            </button>
+                        </td>
                     </tr>
                 </tbody>
             </table>
