@@ -126,6 +126,28 @@
         $scope.format = $scope.formats[0];
         //End calendar code
 
+        //an array of files selected
+        $scope.files = [];
+
+        //listen for the file selected event
+        $scope.$on("fileSelected", function (event, args) {
+            $scope.$apply(function () {
+                //add the file object to the scope's files collection
+                $scope.files.push(args.file);
+            });
+        });
+
+        //the save method
+        $scope.saveWithFiles = function () {
+            workoutService.saveWithFiles($scope.workout, $scope.files)
+            .success(function (data, status, headers, config) {
+                alert("success!");
+            }).
+            error(function (data, status, headers, config) {
+                alert("failed!");
+            });
+        };
+
         init();
 
         

@@ -134,6 +134,7 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="app\app.js" />
+    <Content Include="app\Directives\file-upload.js" />
     <Content Include="app\Exercises\ExerciseNewController.js" />
     <Content Include="app\Exercises\exerciseNew.html" />
     <Content Include="app\Exercises\exerciseDetail.html" />
