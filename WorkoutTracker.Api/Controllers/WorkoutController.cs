@@ -9,6 +9,7 @@ using System.Threading.Tasks;
 using System.Web;
 using System.Web.Http;
 using AutoMapper;
+using Newtonsoft.Json;
 using WorkoutTracker.Api.Dtos;
 using WorkoutTracker.Api.Models;
 
@@ -59,39 +60,68 @@ namespace WorkoutTracker.Api.Controllers
         {
             if (!ModelState.IsValid)
                 return BadRequest(ModelState);
-            var oldEntity = _unitOfWork.RepositoryFor<Workout>().GetById(id);
-            Mapper.Map<WorkoutDto, Workout>(workout,oldEntity);
-            _unitOfWork.Commit();
+            SaveWorkout(id, workout);
             return Content(HttpStatusCode.Accepted, workout);
         }
 
-        [Route("api/workout/postStuff")]
-        public async Task<HttpResponseMessage> PostStuff()
+        void SaveWorkout(int id, WorkoutDto workout)
+        {
+            try
+            {
+                var oldEntity = _unitOfWork.RepositoryFor<Workout>().GetById(id);
+                Mapper.Map<WorkoutDto, Workout>(workout, oldEntity);
+                _unitOfWork.Commit();
+            }
+            catch (Exception ex)
+            {
+                
+                throw;
+            }
+            
+        }
+
+        [Route("api/workout/upsert")]
+        public async Task<HttpResponseMessage> SaveOrUpdate()
         {
             if (!Request.Content.IsMimeMultipartContent())
             {
                 throw new HttpResponseException(HttpStatusCode.UnsupportedMediaType);
             }
 
-            var root = HttpContext.Current.Server.MapPath("~/App_Data/Temp/FileUploads");
+            var temp = HttpContext.Current.Server.MapPath("~/App_Data/Temp/FileUploads");
+            var root = HttpContext.Current.Server.MapPath("~/App_Data/Images/");
+            Directory.CreateDirectory(temp);
             Directory.CreateDirectory(root);
-            var provider = new MultipartFormDataStreamProvider(root);
+            var provider = new MultipartFormDataStreamProvider(temp);
             var result = await Request.Content.ReadAsMultipartAsync(provider);
             if (result.FormData["workout"] == null)
             {
                 throw new HttpResponseException(HttpStatusCode.BadRequest);
             }
 
-            var model = result.FormData["workout"];
+
+            var jsonWorkout = result.FormData["workout"];
             //TODO: Do something with the json model which is currently a string
+            var workoutDto = JsonConvert.DeserializeObject<WorkoutDto>(jsonWorkout);
 
-
-
+            var id = result.FormData["id"];
             //get the files
-            foreach (var file in result.FileData)
+            foreach (MultipartFileData file in result.FileData)
             {
-                //TODO: Do something with each uploaded file
+                var image = new ImageDto();
+
+                //Add the original extention to the file
+                string imageName = Guid.NewGuid() + Path.GetExtension(file.Headers.ContentDisposition.FileName.Replace("\"", ""));
+                string newFileName = String.Format("{0}{1}", root, imageName);
+                File.Move(file.LocalFileName, newFileName);
+                image.Name = imageName;
+                workoutDto.Images.Add(image);
             }
+
+            
+            SaveWorkout(int.Parse(id), workoutDto);
+
+            
 
             return Request.CreateResponse(HttpStatusCode.OK, "success!");
         }

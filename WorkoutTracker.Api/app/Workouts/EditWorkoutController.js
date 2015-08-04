@@ -139,7 +139,7 @@
 
         //the save method
         $scope.saveWithFiles = function () {
-            workoutService.saveWithFiles($scope.workout, $scope.files)
+            workoutService.saveWithFiles($scope.workout.id, $scope.workout, $scope.files)
             .success(function (data, status, headers, config) {
                 alert("success!");
             }).

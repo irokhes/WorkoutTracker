@@ -23,6 +23,10 @@ namespace WorkoutTracker.Api
             Mapper.CreateMap<WorkoutExercise, WorkoutExerciseDto>()
                 .ForMember(dest =>dest.Name, opts =>opts.MapFrom(x =>x.Exercise.Name));
             Mapper.CreateMap<WorkoutExerciseDto, WorkoutExercise>();
+
+            Mapper.CreateMap<ImageDto, Images>();
+            Mapper.CreateMap<Images, ImageDto>()
+                .ForMember(dest =>dest.Bytes, opts =>opts.MapFrom(x =>x.Bytes));
         }
     }
 }

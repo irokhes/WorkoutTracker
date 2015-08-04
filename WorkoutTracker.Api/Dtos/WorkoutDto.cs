@@ -15,15 +15,8 @@ namespace WorkoutTracker.Api.Dtos
 
         [JsonConverter(typeof(StringEnumConverter))]
         public WODType WODType { get; set; }
-
         public List<WorkoutExerciseDto> Exercises { get; set; }
-    }
 
-    public class WorkoutExerciseDto
-    {
-        public int ExerciseId { get; set; }
-        public  string Name { get; set; }
-        public  int NumReps { get; set; }
-        public  decimal WeightOrDistance { get; set; }
+        public List<ImageDto> Images { get; set; } 
     }
 }

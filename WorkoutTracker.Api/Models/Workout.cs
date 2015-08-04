@@ -15,6 +15,8 @@ namespace WorkoutTracker.Api.Models
 
         public virtual WODType WODType { get; set; }
         public virtual ICollection<WorkoutExercise> Exercises { get; set; }
+
+        public virtual ICollection<Images> Images { get; set; } 
     }
 
     public enum WODType

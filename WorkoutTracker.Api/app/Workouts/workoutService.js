@@ -19,17 +19,17 @@
             return $http.put(urlBase + '/'+ id, workout);
         }
 
-        this.saveWithFiles = function (workout, files) {
+        this.saveWithFiles = function (id, workout, files) {
             console.info(files);
             return $http({
                 method: 'POST',
-                url: "api/workout/postStuff",
+                url: "api/workout/upsert",
                 //IMPORTANT!!! You might think this should be set to 'multipart/form-data' 
                 // but this is not true because when we are sending up files the request 
                 // needs to include a 'boundary' parameter which identifies the boundary 
                 // name between parts in this multi-part request and setting the Content-type 
                 // manually will not set this boundary parameter. For whatever reason, 
-                // setting the Content-type to 'false' will force the request to automatically
+                // setting the Content-type to 'undefined' will force the request to automatically
                 // populate the headers properly including the boundary parameter.
                 headers: { 'Content-Type': undefined },
                 //This method will allow us to change how the data is sent up to the server
@@ -40,6 +40,7 @@
                     // the browser will do a 'toString()' on the object which will result 
                     // in the value '[Object object]' on the server.
                     formData.append("workout", angular.toJson(data.workout));
+                    formData.append("id", id);
                     //now add all of the assigned files
                     for (var i = 0; i < data.files.length; i++) {
                         //add each file to the form data and iteratively name them
