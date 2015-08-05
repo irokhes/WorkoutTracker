@@ -2,19 +2,19 @@
     <div class="form-group">
         <label for="inputName" class="col-sm-2 control-label">Name</label>
         <div class="col-sm-10">
-            <input type="text" ng-model="name" class="form-control" id="inputName" placeholder="Exercise Name">
+            <input type="text" ng-model="exercise.name" class="form-control" id="inputName" placeholder="Exercise Name">
         </div>
     </div>
     <div class="form-group">
         <label for="inputDescription" class="col-sm-2 control-label">Description</label>
         <div class="col-sm-10">
-            <input type="text" ng-model="description" class="form-control" id="inputDescription" placeholder="Description">
+            <input type="text" ng-model="exercise.description" class="form-control" id="inputDescription" placeholder="Description">
         </div>
     </div>
     <div class="form-group">
         <label for="inputDescription" class="col-sm-2 control-label">Muscular Group</label>
         <div class="col-sm-10">
-            <select ng-model="selectedMuscularGroup" class="form-control" ng-options="item for item in muscularGroup"></select>
+            <select ng-model="exercise.muscularGroup" class="form-control" ng-options="item for item in muscularGroup"></select>
         </div>
     </div>
     <div class="form-group">

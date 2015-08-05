@@ -12,6 +12,10 @@
             controller: "EditExerciseController",
             templateUrl: "app/Exercises/editExercise.html"
         })
+        .when("/exercises/edit/:id", {
+            controller: "EditExerciseController",
+            templateUrl: "app/Exercises/editExercise.html"
+        })
         .when("/exercises/:id", {
             controller: "DetailExerciseController",
             templateUrl: "app/Exercises/exerciseDetail.html"

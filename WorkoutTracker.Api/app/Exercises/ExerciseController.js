@@ -42,7 +42,7 @@
         }
 
         function getExercises() {
-            exerciseService.get().success(function (exercises) {
+            exerciseService.getAll().success(function (exercises) {
                 $scope.exercices = exercises;
                 $scope.totalExercises = $scope.exercices.length;
                 filterExercises();

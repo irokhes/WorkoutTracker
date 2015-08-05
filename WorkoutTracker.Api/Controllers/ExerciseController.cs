@@ -54,12 +54,12 @@ namespace WorkoutTracker.Api.Controllers
         }
 
         [HttpPut]
-        [Route("api/exercise")]
-        public IHttpActionResult Put(ExerciseDto exerciseDto)
+        [Route("api/exercise/{id:int}")]
+        public IHttpActionResult Put(int id, ExerciseDto exerciseDto)
         {
             if (!ModelState.IsValid)
                 return BadRequest(ModelState);
-            var oldExercise = _unitOfWork.RepositoryFor<Exercise>().GetById(exerciseDto.Id);
+            var oldExercise = _unitOfWork.RepositoryFor<Exercise>().GetById(id);
             var exercise = Mapper.Map<ExerciseDto, Exercise>(exerciseDto,oldExercise);
             _unitOfWork.Commit();
 
