@@ -11,15 +11,12 @@
             return $http.get(urlBase + '/'+ id);
         };
 
-        this.save = function (workout) {
-            return $http.post(urlBase, workout);
-        }
 
         this.update = function(id, workout) {
             return $http.put(urlBase + '/'+ id, workout);
         }
 
-        this.saveWithFiles = function (id, workout, files) {
+        this.save = function (id, workout, files) {
             console.info(files);
             return $http({
                 method: 'POST',

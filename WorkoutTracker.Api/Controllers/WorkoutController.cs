@@ -31,13 +31,12 @@ namespace WorkoutTracker.Api.Controllers
             return Mapper.Map<List<Workout>, List<WorkoutDto>>(_unitOfWork.RepositoryFor<Workout>().GetAll().ToList());
         }
 
-        
+
 
         [Route("api/workout/{id:int}")]
         public IHttpActionResult Get(int id)
         {
-            var workout = _unitOfWork.RepositoryFor<Workout>().GetById(id);
-            var workoutDto = Mapper.Map<Workout, WorkoutDto>(workout);
+            var workoutDto = Mapper.Map<Workout, WorkoutDto>(_unitOfWork.RepositoryFor<Workout>().GetById(id));
             return Ok(workoutDto);
         }
 
@@ -47,10 +46,11 @@ namespace WorkoutTracker.Api.Controllers
         {
             if (!ModelState.IsValid)
                 return BadRequest(ModelState);
-            _unitOfWork.RepositoryFor<Workout>().Insert(Mapper.Map<WorkoutDto, Workout>(newWorkout));
+            Workout workout = Mapper.Map<WorkoutDto, Workout>(newWorkout);
+            _unitOfWork.RepositoryFor<Workout>().Insert(workout);
             _unitOfWork.Commit();
             return Created(Request.RequestUri + newWorkout.Id.ToString(CultureInfo.InvariantCulture), newWorkout);
-    
+
         }
 
 
@@ -64,20 +64,11 @@ namespace WorkoutTracker.Api.Controllers
             return Content(HttpStatusCode.Accepted, workout);
         }
 
-        void SaveWorkout(int id, WorkoutDto workout)
+        void SaveWorkout(int id, WorkoutDto workoutDto)
         {
-            try
-            {
-                var oldEntity = _unitOfWork.RepositoryFor<Workout>().GetById(id);
-                Mapper.Map<WorkoutDto, Workout>(workout, oldEntity);
-                _unitOfWork.Commit();
-            }
-            catch (Exception ex)
-            {
-                
-                throw;
-            }
-            
+            var oldEntity = _unitOfWork.RepositoryFor<Workout>().GetById(id);
+            var workout =   Mapper.Map<WorkoutDto, Workout>(workoutDto, oldEntity);
+            _unitOfWork.Commit();
         }
 
         [Route("api/workout/upsert")]
@@ -101,7 +92,6 @@ namespace WorkoutTracker.Api.Controllers
 
 
             var jsonWorkout = result.FormData["workout"];
-            //TODO: Do something with the json model which is currently a string
             var workoutDto = JsonConvert.DeserializeObject<WorkoutDto>(jsonWorkout);
 
             var id = result.FormData["id"];
@@ -118,10 +108,10 @@ namespace WorkoutTracker.Api.Controllers
                 workoutDto.Images.Add(image);
             }
 
-            
+
             SaveWorkout(int.Parse(id), workoutDto);
 
-            
+
 
             return Request.CreateResponse(HttpStatusCode.OK, "success!");
         }

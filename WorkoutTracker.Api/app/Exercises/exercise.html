@@ -18,12 +18,16 @@
             <ul class="list-group" ng-repeat="exercise in filteredExercises">
                 <li class="list-group-item">
                     <div class="row vertical-align">
-                        <div class="col-xs-12 col-md-12">
+                        <div class="col-xs-10 col-md-10">
                             <a href="" ng-click="showExerciseDetails(exercise.id)">
                                 <h2>{{exercise.name}}</h2>
                             </a>
                             <span>{{exercise.description}}</span>
                         </div>
+                    </div>
+                    <div class=" col-xs-2 col-md-2 btn-group btn-group-sm">
+                        <button class="btn-group" data-ng-click="edit(exercise.id)"><span class="glyphicon glyphicon-pencil"></span></button>
+                        <button class="btn-group" data-ng-click="delete(exercise.id)"><span class="glyphicon glyphicon-remove"></span></button>
                     </div>
                     <div class="row">
                         <div class="col-xs-2 col-md-1">

@@ -9,11 +9,11 @@
             templateUrl: "app/Exercises/exercise.html"
         })
         .when("/exercises/new", {
-            controller: "ExerciseNewController",
-            templateUrl: "app/Exercises/exerciseNew.html"
+            controller: "EditExerciseController",
+            templateUrl: "app/Exercises/editExercise.html"
         })
         .when("/exercises/:id", {
-            controller: "ExerciseDetailController",
+            controller: "DetailExerciseController",
             templateUrl: "app/Exercises/exerciseDetail.html"
             })
         .when("/workouts", {

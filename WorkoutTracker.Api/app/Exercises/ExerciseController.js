@@ -24,6 +24,14 @@
             $location.path('/exercises/new');
         }
 
+        $scope.edit = function (id) {
+            $location.path('/exercises/edit/' + id);
+        }
+
+        $scope.delete = function () {
+
+        }
+
         $scope.filter = function () {
             filterExercises();
         };

@@ -47,7 +47,7 @@
             resetNewExercise();
         };
 
-        $scope.deleteExercise = function(exercise) {
+        $scope.deleteExercise = function (exercise) {
             var index = $scope.workout.exercises.indexOf(exercise);
             $scope.workout.exercises.splice(index, 1);
         }
@@ -58,29 +58,29 @@
             $scope.isExerciseSelected = false;
         }
 
-        $scope.save = function () {
-            if ($scope.workout.id !== 'undefined' && $scope.workout.id !== 0) {
-                workoutService.update($scope.workout.id, toDto())
-                    .success(function (data) {
-                        $location.path('/workouts');
-                    }).
-                    error(function (error) {
-                        $scope.status = 'Unable to load exercises: ' + error.message;
-                        console.error('Unable to load exercises: ' + error.message);
-                    });
+        //$scope.save = function () {
+        //    if ($scope.workout.id !== 'undefined' && $scope.workout.id !== 0) {
+        //        workoutService.update($scope.workout.id, toDto())
+        //            .success(function (data) {
+        //                $location.path('/workouts');
+        //            }).
+        //            error(function (error) {
+        //                $scope.status = 'Unable to load exercises: ' + error.message;
+        //                console.error('Unable to load exercises: ' + error.message);
+        //            });
 
-            } else {
-                workoutService.save(toDto())
-                    .success(function (data) {
-                        $location.path('/workouts');
-                    }).
-                    error(function (error) {
-                        $scope.status = 'Unable to load exercises: ' + error.message;
-                        console.error('Unable to load exercises: ' + error.message);
-                    });
-            }
+        //    } else {
+        //        workoutService.save(toDto())
+        //            .success(function (data) {
+        //                $location.path('/workouts');
+        //            }).
+        //            error(function (error) {
+        //                $scope.status = 'Unable to load exercises: ' + error.message;
+        //                console.error('Unable to load exercises: ' + error.message);
+        //            });
+        //    }
 
-        }
+        //}
 
         function toDto() {
             return {
@@ -138,18 +138,19 @@
         });
 
         //the save method
-        $scope.saveWithFiles = function () {
+        $scope.save = function () {
             workoutService.saveWithFiles($scope.workout.id, $scope.workout, $scope.files)
-            .success(function (data, status, headers, config) {
-                alert("success!");
+            .success(function (data) {
+                $location.path('/workouts');
             }).
-            error(function (data, status, headers, config) {
-                alert("failed!");
+            error(function (error) {
+                $scope.status = 'Unable to load exercises: ' + error.message;
+                console.error('Unable to load exercises: ' + error.message);
             });
         };
 
         init();
 
-        
+
     }]);
 })();
