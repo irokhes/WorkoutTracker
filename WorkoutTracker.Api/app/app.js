@@ -1,12 +1,17 @@
 ﻿var app;
-(function() {
+(function () {
     'use strict';
     app = angular.module('workoutTracker', ['ngRoute', 'ui.bootstrap', 'ui.bootstrap.datepicker']);
 
-    app.config(function($routeProvider) {
-        $routeProvider.when("/exercises", {
+    app.config(function ($routeProvider) {
+        $routeProvider
+        .when("/exercises", {
             controller: "ExerciseController",
             templateUrl: "app/Exercises/exercise.html"
+        })
+        .when("/exercises/detail/:id", {
+            controller: "DetailExerciseController",
+            templateUrl: "app/Exercises/detailExercise.html"
         })
         .when("/exercises/new", {
             controller: "EditExerciseController",
@@ -16,18 +21,18 @@
             controller: "EditExerciseController",
             templateUrl: "app/Exercises/editExercise.html"
         })
-        .when("/exercises/:id", {
-            controller: "DetailExerciseController",
-            templateUrl: "app/Exercises/exerciseDetail.html"
-            })
         .when("/workouts", {
             controller: "WorkoutController",
             templateUrl: "app/Workouts/workout.html"
         })
+        .when("/workouts/detail/:id", {
+            controller: "DetailWorkoutController",
+            templateUrl: "app/Workouts/detailWorkout.html"
+        })
         .when("/workouts/edit", {
-                controller: "EditWorkoutController",
-                templateUrl: "app/Workouts/editWorkout.html"
-            })
+            controller: "EditWorkoutController",
+            templateUrl: "app/Workouts/editWorkout.html"
+        })
         .when("/workouts/edit/:id", {
             controller: "EditWorkoutController",
             templateUrl: "app/Workouts/editWorkout.html"

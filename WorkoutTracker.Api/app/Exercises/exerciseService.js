@@ -11,13 +11,13 @@
             return $http.get(urlBase + '/' + id);
         };
 
-        this.save = function (exercise) {
+        this.save = function(exercise) {
             return $http.post(urlBase, exercise);
-        }
+        };
 
-        this.update = function (id, exercise) {
+        this.update = function(id, exercise) {
             return $http.put(urlBase + '/' + id, exercise);
-        }
+        };
 
     }]);
 })();

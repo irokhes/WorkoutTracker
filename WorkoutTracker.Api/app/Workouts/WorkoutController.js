@@ -15,8 +15,12 @@
             getWorkouts();
         };
 
+        $scope.showDetails = function(id){
+            $location.path('/workouts/detail/' + id);
+        };
+
         $scope.newWorkout = function () {
-            $location.path('/workouts/edit/');
+            $location.path('/workouts/edit');
         }
 
         $scope.edit = function (id) {

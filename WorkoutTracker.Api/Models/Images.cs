@@ -19,11 +19,16 @@ namespace WorkoutTracker.Api.Models
             get
             {
                 var filePath = System.Web.HttpContext.Current.Server.MapPath(string.Format("~/App_Data/Images/{0}", Name));
-                var fileStream = new FileStream(filePath, FileMode.Open);
-                Image image = Image.FromStream(fileStream);
-                var memoryStream = new MemoryStream();
-                image.Save(memoryStream, ImageFormat.Jpeg);
-                return memoryStream.ToArray();
+                using (var fileStream = new FileStream(filePath, FileMode.Open))
+                {
+                    Image image = Image.FromStream(fileStream);
+                    using (var memoryStream = new MemoryStream())
+                    {
+                        image.Save(memoryStream, ImageFormat.Jpeg);
+                        return memoryStream.ToArray();
+                    }
+                }
+                
             } 
         }
     }
