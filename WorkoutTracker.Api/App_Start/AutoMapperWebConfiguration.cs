@@ -26,7 +26,7 @@ namespace WorkoutTracker.Api
 
             Mapper.CreateMap<ImageDto, Images>();
             Mapper.CreateMap<Images, ImageDto>()
-                .ForMember(dest =>dest.Bytes, opts =>opts.MapFrom(x =>x.Bytes));
+                .ForMember(dest =>dest.Image, opts =>opts.MapFrom(x =>x.ImageBase64));
         }
     }
 }

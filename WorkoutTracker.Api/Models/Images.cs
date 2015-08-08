@@ -12,20 +12,21 @@ namespace WorkoutTracker.Api.Models
     {
         public int Id { get; set; }
         public string Name { get; set; }
+        public string Thumbnail { get; set; }
 
         [NotMapped]
-        public byte[] Bytes
+        public string ImageBase64
         {
             get
             {
-                var filePath = System.Web.HttpContext.Current.Server.MapPath(string.Format("~/App_Data/Images/{0}", Name));
+                var filePath = System.Web.HttpContext.Current.Server.MapPath(string.Format("~/App_Data/Images/{0}", Thumbnail));
                 using (var fileStream = new FileStream(filePath, FileMode.Open))
                 {
                     Image image = Image.FromStream(fileStream);
                     using (var memoryStream = new MemoryStream())
                     {
                         image.Save(memoryStream, ImageFormat.Jpeg);
-                        return memoryStream.ToArray();
+                        return Convert.ToBase64String(memoryStream.ToArray());
                     }
                 }
                 
