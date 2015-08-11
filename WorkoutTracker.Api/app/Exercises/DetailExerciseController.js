@@ -1,16 +1,18 @@
 ﻿(function() {
     'use strict';
-    app.controller('DetailExerciseController', ['$scope', '$routeParams', 'exerciseService', function ($scope, $routeParams, exerciseService) {
+    app.controller('DetailExerciseController', ['$scope', '$routeParams', 'exerciseService', 'Lightbox', function ($scope, $routeParams, exerciseService, Lightbox) {
         $scope.exercise = {};
 
-        $scope.back = function () {
-            history.back();
-        }
+        init();
 
         function init() {
             if ($routeParams.id !== 'undefined') {
                 getExerciseDetails();
             }
+        };
+
+        $scope.back = function() {
+            history.back();
         };
 
         function getExerciseDetails() {
@@ -22,7 +24,9 @@
             });
         }
 
-        init();
+
+
+        
 
 
     }]);

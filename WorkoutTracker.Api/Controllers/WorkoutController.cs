@@ -6,6 +6,7 @@ using System.IO;
 using System.Linq;
 using System.Net;
 using System.Net.Http;
+using System.Net.Http.Headers;
 using System.Threading.Tasks;
 using System.Web;
 using System.Web.Hosting;
@@ -28,9 +29,17 @@ namespace WorkoutTracker.Api.Controllers
         }
 
         [Route("api/workout")]
-        public IEnumerable<WorkoutDto> Get()
+        public IEnumerable<WorkoutListDto> Get()
         {
-            return Mapper.Map<List<Workout>, List<WorkoutDto>>(_unitOfWork.RepositoryFor<Workout>().GetAll().ToList());
+            return _unitOfWork.RepositoryFor<Workout>().GetAll()
+                .Select(x => new WorkoutListDto
+                {
+                    Id = x.Id,
+                    Name = x.Name,
+                    Description = x.Description,
+                    Date = x.Date,
+                    WODType = x.WODType
+                }).ToList();
         }
 
 
@@ -80,65 +89,78 @@ namespace WorkoutTracker.Api.Controllers
             {
                 throw new HttpResponseException(HttpStatusCode.UnsupportedMediaType);
             }
-            try
+
+
+
+            var temp = HostingEnvironment.MapPath("~/temp/images/");
+            var root = HostingEnvironment.MapPath("~/images/");
+            if (!Directory.Exists(temp)) Directory.CreateDirectory(temp);
+            if (!Directory.Exists(root)) Directory.CreateDirectory(root);
+
+            var provider = new MultipartFormDataStreamProvider(temp);
+            var result = await Request.Content.ReadAsMultipartAsync(provider);
+            if (result.FormData["workout"] == null)
             {
+                throw new HttpResponseException(HttpStatusCode.BadRequest);
+            }
 
 
-                var temp = HostingEnvironment.MapPath("~/temp/images/");
-                var root = HostingEnvironment.MapPath("~/images/");
-                Directory.CreateDirectory(temp);
-                Directory.CreateDirectory(root);
-                var provider = new MultipartFormDataStreamProvider(temp);
-                var result = await Request.Content.ReadAsMultipartAsync(provider);
-                if (result.FormData["workout"] == null)
+            var jsonWorkout = result.FormData["workout"];
+            var workoutDto = JsonConvert.DeserializeObject<WorkoutDto>(jsonWorkout);
+
+            var id = result.FormData["id"];
+            //get the files
+            foreach (MultipartFileData file in result.FileData)
+            {
+                var image = new ImageDto();
+
+                //Add the original extention to the file
+                string imageName = Guid.NewGuid() + Path.GetExtension(file.Headers.ContentDisposition.FileName.Replace("\"", ""));
+                string newFileName = String.Format("{0}{1}", root, imageName);
+                File.Move(file.LocalFileName, newFileName);
+                // Load image.
+                using (Image imageThumbnail = Image.FromFile(newFileName))
                 {
-                    throw new HttpResponseException(HttpStatusCode.BadRequest);
-                }
-
-
-                var jsonWorkout = result.FormData["workout"];
-                var workoutDto = JsonConvert.DeserializeObject<WorkoutDto>(jsonWorkout);
-
-                var id = result.FormData["id"];
-                //get the files
-                foreach (MultipartFileData file in result.FileData)
-                {
-                    var image = new ImageDto();
-                   
-                    //Add the original extention to the file
-                    string imageName = Guid.NewGuid() + Path.GetExtension(file.Headers.ContentDisposition.FileName.Replace("\"", ""));
-                    string newFileName = String.Format("{0}{1}", root, imageName);
-                    File.Move(file.LocalFileName, newFileName);
-                    // Load image.
-                    using (Image imageThumbnail = Image.FromFile(newFileName))
+                    // Compute thumbnail size.
+                    Size thumbnailSize = GetThumbnailSize(imageThumbnail);
+                    // Get thumbnail.
+                    using (Image thumbnail = imageThumbnail.GetThumbnailImage(thumbnailSize.Width,
+                        thumbnailSize.Height, null, IntPtr.Zero))
                     {
-                        // Compute thumbnail size.
-                        Size thumbnailSize = GetThumbnailSize(imageThumbnail);
-                        // Get thumbnail.
-                        using (Image thumbnail = imageThumbnail.GetThumbnailImage(thumbnailSize.Width,
-                            thumbnailSize.Height, null, IntPtr.Zero))
-                        {
-                           
-                            string imageThumbanilName = "thumbnail_" + imageName;
 
-                            thumbnail.Save(String.Format("{0}{1}", root, imageThumbanilName));
-                            image.Name = imageName;
-                            image.Thumbnail = imageThumbanilName;
+                        string imageThumbanilName = "thumbnail_" + imageName;
 
-                            workoutDto.Images.Add(image);
-                        }
+                        thumbnail.Save(String.Format("{0}{1}", root, imageThumbanilName));
+                        image.Name = imageName;
+                        image.Thumbnail = imageThumbanilName;
+
+                        workoutDto.Images.Add(image);
                     }
                 }
-                SaveWorkout(int.Parse(id), workoutDto);
-                return Request.CreateResponse(HttpStatusCode.OK, "success!");
-
             }
-            catch (Exception ex)
+            SaveWorkout(int.Parse(id), workoutDto);
+            return Request.CreateResponse(HttpStatusCode.OK, "success!");
+
+
+
+        }
+        [Route("api/workout/image/{id}")]
+        [HttpGet]
+        public IHttpActionResult GetImage(string id)
+        {
+            var fileStream = new FileStream(HostingEnvironment.MapPath("~/images/" + id), FileMode.Open);
+
+            var resp = new HttpResponseMessage()
             {
+                Content = new StreamContent(fileStream)
+            };
 
-                throw;
-            }
-
+            // Find the MIME type
+            //string mimeType = _extensions[Path.GetExtension(path)];
+            string mimeType = "image/png";
+            resp.Content.Headers.ContentType = new MediaTypeHeaderValue(mimeType);
+            IHttpActionResult response = ResponseMessage(resp);
+            return response;
         }
 
         Size GetThumbnailSize(Image original)

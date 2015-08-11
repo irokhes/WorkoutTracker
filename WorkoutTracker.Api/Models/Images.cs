@@ -14,23 +14,5 @@ namespace WorkoutTracker.Api.Models
         public string Name { get; set; }
         public string Thumbnail { get; set; }
 
-        [NotMapped]
-        public string ImageBase64
-        {
-            get
-            {
-                var filePath = System.Web.HttpContext.Current.Server.MapPath(string.Format("~/App_Data/Images/{0}", Thumbnail));
-                using (var fileStream = new FileStream(filePath, FileMode.Open))
-                {
-                    Image image = Image.FromStream(fileStream);
-                    using (var memoryStream = new MemoryStream())
-                    {
-                        image.Save(memoryStream, ImageFormat.Jpeg);
-                        return Convert.ToBase64String(memoryStream.ToArray());
-                    }
-                }
-                
-            } 
-        }
     }
 }

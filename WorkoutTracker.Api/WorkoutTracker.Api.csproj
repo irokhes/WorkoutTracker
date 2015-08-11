@@ -152,6 +152,7 @@
     <Content Include="app\Workouts\workout.html" />
     <Content Include="app\Workouts\WorkoutController.js" />
     <Content Include="app\Workouts\workoutService.js" />
+    <Content Include="Content\angular-bootstrap-lightbox.css" />
     <Content Include="Content\bootstrap.css" />
     <Content Include="Content\bootstrap.min.css" />
     <Content Include="Content\Site.css" />
@@ -159,6 +160,7 @@
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Global.asax" />
     <Content Include="Index.html" />
+    <Content Include="Scripts\angular-bootstrap-lightbox.js" />
     <Content Include="Scripts\jquery-1.11.3.min.js" />
     <Content Include="Scripts\typeahead.bundle.js" />
     <Content Include="Scripts\ui-bootstrap-tpls.js" />
@@ -185,6 +187,7 @@
     <Compile Include="Dtos\ImageDto.cs" />
     <Compile Include="Dtos\WorkoutDto.cs" />
     <Compile Include="Dtos\WorkoutExerciseDto.cs" />
+    <Compile Include="Dtos\WorkoutListDto.cs" />
     <Compile Include="Models\Images.cs" />
     <Compile Include="Models\WorkoutExercise.cs" />
     <Compile Include="Models\Exercise.cs" />

@@ -1,11 +1,15 @@
 ﻿(function() {
     'use strict';
-    app.controller('DetailWorkoutController', ['$scope', '$routeParams', 'workoutService', function ($scope, $routeParams, workoutService) {
+    app.controller('DetailWorkoutController', ['$scope', '$routeParams', 'workoutService', 'Lightbox', function ($scope, $routeParams, workoutService, Lightbox) {
         $scope.workout = {};
 
         $scope.back = function () {
             history.back();
         }
+
+        $scope.openLightboxModal = function (image) {
+            Lightbox.openModal([image], 0);
+        };
 
         function init() {
             if ($routeParams.id !== 'undefined') {

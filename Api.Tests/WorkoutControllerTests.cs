@@ -18,7 +18,7 @@ namespace UnitTests
     public class When_getting_the_list_of_workouts : WithSubject<WorkoutController>
     {
         static List<Workout> workouts;
-        static List<WorkoutDto> result;
+        static List<WorkoutListDto> result;
 
         Establish context = () =>
         {
@@ -35,7 +35,7 @@ namespace UnitTests
 
         Because of = () =>
         {
-            result = (List<WorkoutDto>)Subject.Get();
+            result = (List<WorkoutListDto>)Subject.Get();
         };
 
         It should_contain_a_list_of_workouts = () =>

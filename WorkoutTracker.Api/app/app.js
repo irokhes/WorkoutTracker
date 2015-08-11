@@ -1,7 +1,13 @@
 ﻿var app;
 (function () {
     'use strict';
-    app = angular.module('workoutTracker', ['ngRoute', 'ui.bootstrap', 'ui.bootstrap.datepicker']);
+    app = angular.module('workoutTracker', ['ngRoute', 'ui.bootstrap', 'ui.bootstrap.datepicker', 'bootstrapLightbox']);
+
+    app.config(function (LightboxProvider) {
+        LightboxProvider.getImageUrl = function (image) {
+            return image.baseUrl + image.name + "/";
+        };
+    });
 
     app.config(function ($routeProvider) {
         $routeProvider
@@ -37,6 +43,6 @@
             controller: "EditWorkoutController",
             templateUrl: "app/Workouts/editWorkout.html"
         })
-        .otherwise({ redirectTo: '/exercises' });
+        .otherwise({ redirectTo: '/workouts' });
     });
 })();
