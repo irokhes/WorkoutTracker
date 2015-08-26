@@ -1,7 +1,7 @@
 ﻿var app;
 (function () {
     'use strict';
-    app = angular.module('workoutTracker', ['ngRoute', 'ui.bootstrap', 'ui.bootstrap.datepicker', 'bootstrapLightbox']);
+    app = angular.module('workoutTracker', ['ngRoute', 'ui.bootstrap', 'ui.bootstrap.datepicker', 'bootstrapLightbox', 'filereader']);
 
     app.config(function (LightboxProvider) {
         LightboxProvider.getImageUrl = function (image) {

@@ -1,6 +1,6 @@
 ﻿(function () {
     'use strict';
-    app.controller('EditWorkoutController', ['$scope', '$location', '$routeParams', 'workoutService', 'exerciseService', function ($scope, $location, $routeParams, workoutService, exerciseService) {
+    app.controller('EditWorkoutController', ['$scope', '$location', '$routeParams', 'workoutService', 'exerciseService', 'FileReader', function ($scope, $location, $routeParams, workoutService, exerciseService, FileReader) {
 
 
         $scope.workout = {};
@@ -58,30 +58,6 @@
             $scope.isExerciseSelected = false;
         }
 
-        //$scope.save = function () {
-        //    if ($scope.workout.id !== 'undefined' && $scope.workout.id !== 0) {
-        //        workoutService.update($scope.workout.id, toDto())
-        //            .success(function (data) {
-        //                $location.path('/workouts');
-        //            }).
-        //            error(function (error) {
-        //                $scope.status = 'Unable to load exercises: ' + error.message;
-        //                console.error('Unable to load exercises: ' + error.message);
-        //            });
-
-        //    } else {
-        //        workoutService.save(toDto())
-        //            .success(function (data) {
-        //                $location.path('/workouts');
-        //            }).
-        //            error(function (error) {
-        //                $scope.status = 'Unable to load exercises: ' + error.message;
-        //                console.error('Unable to load exercises: ' + error.message);
-        //            });
-        //    }
-
-        //}
-
         function toDto() {
             return {
                 Id: $scope.workout.id,
@@ -130,12 +106,31 @@
         $scope.files = [];
 
         //listen for the file selected event
-        $scope.$on("fileSelected", function (event, args) {
-            $scope.$apply(function () {
-                //add the file object to the scope's files collection
-                $scope.files.push(args.file);
+        //$scope.$on("fileSelected", function (event, args) {
+        //    //$scope.$apply(function () {
+        //        //add the file object to the scope's files collection
+
+        //        fileReader.readAsDataUrl(args.file, $scope).then(function (result) {
+        //            $scope.files.push(args.file);
+        //            console.info("File read correctly");
+        //            $scope.imageSrc = result;
+        //        }, function (err) {
+        //            // Do stuff
+        //            console.info(err);
+        //        });
+        //   // });
+        //});
+
+        $scope.getFile = function() {
+            FileReader.readAsDataURL($scope.file, $scope).then(function (result) {
+                $scope.files.push($scope.file);
+                console.info("File read correctly");
+                $scope.imageSrc = result;
+            }, function (err) {
+                // Do stuff
+                console.info(err);
             });
-        });
+        }
 
         //the save method
         $scope.save = function () {

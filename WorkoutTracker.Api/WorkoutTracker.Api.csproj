@@ -161,6 +161,16 @@
     <Content Include="Global.asax" />
     <Content Include="Index.html" />
     <Content Include="Scripts\angular-bootstrap-lightbox.js" />
+    <Content Include="Scripts\angular-filereader\angular-filereader.js" />
+    <Content Include="Scripts\angular-filereader\angular-filereader.min.js" />
+    <Content Include="Scripts\angular-filereader\gulpfile.js" />
+    <Content Include="Scripts\angular-filereader\karma.conf.js" />
+    <Content Include="Scripts\angular-filereader\LICENSE.txt" />
+    <Content Include="Scripts\angular-filereader\src\filereader.service.js" />
+    <Content Include="Scripts\angular\angular-csp.css" />
+    <Content Include="Scripts\angular\angular.js" />
+    <Content Include="Scripts\angular\angular.min.js" />
+    <Content Include="Scripts\angular\index.js" />
     <Content Include="Scripts\jquery-1.11.3.min.js" />
     <Content Include="Scripts\typeahead.bundle.js" />
     <Content Include="Scripts\ui-bootstrap-tpls.js" />
@@ -209,6 +219,17 @@
     <Content Include="fonts\glyphicons-halflings-regular.eot" />
     <None Include="Properties\PublishProfiles\wodtracker - FTP.pubxml" />
     <None Include="Properties\PublishProfiles\wodtracker - Web Deploy.pubxml" />
+    <Content Include="Scripts\angular-filereader\.bower.json" />
+    <Content Include="Scripts\angular-filereader\bower.json" />
+    <Content Include="Scripts\angular-filereader\LICENSE" />
+    <Content Include="Scripts\angular-filereader\package.json" />
+    <Content Include="Scripts\angular-filereader\README.md" />
+    <Content Include="Scripts\angular\.bower.json" />
+    <Content Include="Scripts\angular\angular.min.js.gzip" />
+    <Content Include="Scripts\angular\angular.min.js.map" />
+    <Content Include="Scripts\angular\bower.json" />
+    <Content Include="Scripts\angular\package.json" />
+    <Content Include="Scripts\angular\README.md" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
