@@ -198,6 +198,7 @@
     <Compile Include="Dtos\WorkoutDto.cs" />
     <Compile Include="Dtos\WorkoutExerciseDto.cs" />
     <Compile Include="Dtos\WorkoutListDto.cs" />
+    <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\Images.cs" />
     <Compile Include="Models\WorkoutExercise.cs" />
     <Compile Include="Models\Exercise.cs" />
