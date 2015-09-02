@@ -24,7 +24,7 @@ namespace WorkoutTracker.Api.Controllers
 
         static ExerciseDto GetDto(Exercise exercise)
         {
-            return new ExerciseDto { Id = exercise.Id, MuscularGroup = exercise.MuscularGroup, Name = exercise.Name, Description = exercise.Description };
+            return new ExerciseDto { Id = exercise.Id, Name = exercise.Name, Description = exercise.Description };
         }
 
         [Route("api/exercise")]

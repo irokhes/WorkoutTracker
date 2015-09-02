@@ -10,19 +10,19 @@ namespace WorkoutTracker.Test.Integration
     {
         protected override void Seed(WorkoutTrackerContext context)
         {
-           context.Exercises.AddOrUpdate(
-                                c => c.Id,
-                                new Exercise
-                                {
-                                    Name = "Wall balls",
-                                    Description = " Is a compound exercise which combines a front squat with a medicine ball and a push press-like throwing of the ball to a target located some distance above the exerciser.", 
-                                    MuscularGroup = MuscularGroup.Back },
-                                new Exercise
-                                {
-                                    Name = "Thruster",
-                                    Description = "The Thruster is a powerful movement that moves a weight through a large range of motion. This movement simply combines a front squat with a push press.", 
-                                    MuscularGroup = MuscularGroup.Legs });
- 
+            context.Exercises.AddOrUpdate(
+                                 c => c.Id,
+                                 new Exercise
+                                 {
+                                     Name = "Wall balls",
+                                     Description = " Is a compound exercise which combines a front squat with a medicine ball and a push press-like throwing of the ball to a target located some distance above the exerciser.",
+                                 },
+                                 new Exercise
+                                 {
+                                     Name = "Thruster",
+                                     Description = "The Thruster is a powerful movement that moves a weight through a large range of motion. This movement simply combines a front squat with a push press.",
+                                 });
+
             base.Seed(context);
         }
     }
@@ -43,7 +43,7 @@ namespace WorkoutTracker.Test.Integration
         [TearDown]
         public void TearDown()
         {
-            
+
         }
     }
 

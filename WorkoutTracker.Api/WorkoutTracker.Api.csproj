@@ -198,6 +198,14 @@
     <Compile Include="Dtos\WorkoutDto.cs" />
     <Compile Include="Dtos\WorkoutExerciseDto.cs" />
     <Compile Include="Dtos\WorkoutListDto.cs" />
+    <Compile Include="Migrations\RemoveMuscularGroupFromExercise.cs" />
+    <Compile Include="Migrations\RemoveMuscularGroupFromExercise.Designer.cs">
+      <DependentUpon>RemoveMuscularGroupFromExercise.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\InitialCreate.cs" />
+    <Compile Include="Migrations\InitialCreate.Designer.cs">
+      <DependentUpon>InitialCreate.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\Images.cs" />
     <Compile Include="Models\WorkoutExercise.cs" />
@@ -240,6 +248,14 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Migrations\RemoveMuscularGroupFromExercise.resx">
+      <DependentUpon>RemoveMuscularGroupFromExercise.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\InitialCreate.resx">
+      <DependentUpon>InitialCreate.cs</DependentUpon>
+    </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>

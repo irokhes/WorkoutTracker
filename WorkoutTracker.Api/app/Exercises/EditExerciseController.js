@@ -2,11 +2,9 @@
     'use strict';
     app.controller('EditExerciseController', ['$scope', '$location', '$routeParams', 'exerciseService', function ($scope, $location, $routeParams, exerciseService) {
         $scope.exercise = {};
-        $scope.muscularGroup = ['Biceps', 'Triceps', 'Back', 'Chest', 'Legs', 'Abs'];
-        $scope.exercise.muscularGroup = $scope.muscularGroup[0];
 
         $scope.save = function () {
-            var exercise = { Id: $scope.exercise.id, Name: $scope.exercise.name, Description: $scope.exercise.description, MuscularGroup: $scope.exercise.selectedMuscularGroup };
+            var exercise = { Id: $scope.exercise.id, Name: $scope.exercise.name, Description: $scope.exercise.description };
             var isExistingExercise = typeof $scope.exercise.id != 'undefined' && $scope.exercise.id != 0;
 
             isExistingExercise ? updateExercise(exercise) : createNewExercise(exercise);

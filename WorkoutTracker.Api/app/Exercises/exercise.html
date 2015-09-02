@@ -1,20 +1,17 @@
 ﻿<div class="col-xs-12 col-sm-12 col-md-offset-2 col-md-8 col-md-offset-2">
     <form class="form-horizontal">
+        <div class="form-group">
+            <div class="col-md-10">
+                <input type="text" ng-model="filterValue" ng-change="filter()" class="form-control" placeholder="Filter Exercises by (Name) or (Muscle Group)" />
+            </div>
+            <div class="col-md-2 col-xs-4 col-sm-2">
+                <button class="btn btn-primary pull-right" data-ng-click="newExercise()"><span class="glyphicon glyphicon-plus"></span>New</button>
+            </div>
+        </div>
         <div class="well well-sm" ng-show="totalExercises == 0">
             <h5>No Exercises found</h5>
         </div>
-        <div ng-show="totalExercises > 0">
-            <div class="form-group">
-                <div class="col-md-5">
-                    <input type="text" ng-model="filterValue" ng-change="filter()" class="form-control" placeholder="Filter Exercises by (Name) or (Muscle Group)" />
-                </div>
-                <div class="col-md-5">
-                    <select ng-model="selectedMuscularGroup" ng-change="filter()" class="form-control" ng-options="item for item in muscularGroup"></select>
-                </div>
-                <div class="col-md-2 col-xs-4 col-sm-2">
-                    <button class="btn btn-primary pull-right" data-ng-click="newExercise()"><span class="glyphicon glyphicon-plus"></span>New</button>
-                </div>
-            </div>
+        <div ng-show="totalFilteredExercises > 0">
             <ul class="list-group" ng-repeat="exercise in filteredExercises">
                 <li class="list-group-item">
                     <div class="row vertical-align">

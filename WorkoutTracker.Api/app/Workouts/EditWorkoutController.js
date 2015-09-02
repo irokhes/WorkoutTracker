@@ -13,6 +13,9 @@
         $scope.selectedExercise = '';
         $scope.isExerciseSelected = false;
 
+        init();
+
+
         function init() {
             if ($routeParams.id === 'undefined') {
                 return;
@@ -21,7 +24,7 @@
             workoutService.get($scope.workout.id).then(function (workout) {
                 $scope.workout = workout.data;
                 $scope.workout.dt = workout.data.date;
-                return exerciseService.get();
+                return exerciseService.getAll();
             }).then(function (exercises) {
                 $scope.exercises = exercises.data;
             }).catch(function (error) {
@@ -52,21 +55,15 @@
             $scope.workout.exercises.splice(index, 1);
         }
 
+        $scope.deleteImage = function(image) {
+            var index = $scope.workout.images.indexOf(image); 
+            $scope.workout.images.splice(index, 1);
+        }
+
         function resetNewExercise() {
             $scope.newExercise = {};
             $scope.selectedExercise = '';
             $scope.isExerciseSelected = false;
-        }
-
-        function toDto() {
-            return {
-                Id: $scope.workout.id,
-                Name: $scope.workout.name,
-                Description: $scope.workout.description,
-                Exercises: $scope.workout.exercises,
-                WODType: $scope.workout.selectedWOD,
-                Date: $scope.workout.dt
-            }
         }
 
         //TODO move to directive
@@ -105,35 +102,29 @@
         //an array of files selected
         $scope.files = [];
 
-        //listen for the file selected event
-        //$scope.$on("fileSelected", function (event, args) {
-        //    //$scope.$apply(function () {
-        //        //add the file object to the scope's files collection
+        $scope.getFile = function () {
+            if (typeof $scope.file != 'undefined') {
+                FileReader.readAsDataURL($scope.file, $scope).then(function (result) {
 
-        //        fileReader.readAsDataUrl(args.file, $scope).then(function (result) {
-        //            $scope.files.push(args.file);
-        //            console.info("File read correctly");
-        //            $scope.imageSrc = result;
-        //        }, function (err) {
-        //            // Do stuff
-        //            console.info(err);
-        //        });
-        //   // });
-        //});
-
-        $scope.getFile = function() {
-            FileReader.readAsDataURL($scope.file, $scope).then(function (result) {
-                $scope.files.push($scope.file);
-                console.info("File read correctly");
-                $scope.imageSrc = result;
-            }, function (err) {
-                // Do stuff
-                console.info(err);
-            });
+                    console.info("File read correctly");
+                    $scope.imageSrc = result;
+                }, function (err) {
+                    // Do stuff
+                    console.info(err);
+                });
+            }
+            
+        }
+        $scope.deleteNewImage = function () {
+            $scope.files = null;
+            $scope.imageSrc = null;
         }
 
         //the save method
         $scope.save = function () {
+            if (typeof $scope.file != 'undefined') {
+                $scope.files.push($scope.file);
+            }
             workoutService.save($scope.workout.id, $scope.workout, $scope.files)
             .success(function (data) {
                 $location.path('/workouts');
@@ -143,9 +134,5 @@
                 console.error('Unable to load exercises: ' + error.message);
             });
         };
-
-        init();
-
-
     }]);
 })();

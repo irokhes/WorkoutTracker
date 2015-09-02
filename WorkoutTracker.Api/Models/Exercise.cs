@@ -11,21 +11,8 @@ namespace WorkoutTracker.Api.Models
         public string Name { get; set; }
         public string Description { get; set; }
 
-        public MuscularGroup MuscularGroup { get; set; }
-
         public virtual ICollection<WorkoutExercise> WorkoutsExercises { get; set; }
 
-    }
-
-
-    public enum MuscularGroup
-    {
-        Biceps,
-        Triceps,
-        Back,
-        Chest,
-        Shoulders,
-        Legs
     }
 
     public enum Split

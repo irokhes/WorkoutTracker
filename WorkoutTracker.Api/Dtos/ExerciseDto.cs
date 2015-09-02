@@ -16,8 +16,5 @@ namespace WorkoutTracker.Api.Dtos
         public string Description { get; set; }
         public int NumReps { get; set; }
 
-        [JsonConverter(typeof(StringEnumConverter))]
-        public MuscularGroup MuscularGroup { get; set; }
-
     }
 }

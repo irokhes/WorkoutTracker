@@ -5,8 +5,6 @@
         $scope.totalExercises = 0;
         $scope.filteredExercises = [];
         $scope.totalFilteredExercises = 0;
-        $scope.muscularGroup = ['All','Biceps', 'Triceps', 'Back', 'Chest', 'Legs', 'Abs'];
-        $scope.selectedMuscularGroup = $scope.muscularGroup[0];
         $scope.filterValue = '';
 
         init();
@@ -37,7 +35,7 @@
         };
 
         function filterExercises() {
-            $scope.filteredExercises = $filter('exercisesFilter')($scope.exercices, $scope.filterValue, $scope.selectedMuscularGroup);
+            $scope.filteredExercises = $filter('exercisesFilter')($scope.exercices, $scope.filterValue);
             $scope.totalFilteredExercises = $scope.filteredExercises.length;
         }
 

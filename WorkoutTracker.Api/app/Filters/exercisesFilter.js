@@ -1,17 +1,14 @@
 ﻿(function() {
     app.filter('exercisesFilter', function() {
-        return function (exercises, filterValue, muscularGroup) {
-            if (!filterValue && muscularGroup === 'All')
+        return function (exercises, filterValue) {
+            if (filterValue === '') {
                 return exercises;
+            }
             var matches = [];
-
             for (var i = 0; i < exercises.length; i++) {
-                var isTheRightMuscularGroup = muscularGroup === 'All' || exercises[i].MuscularGroup === muscularGroup;
-                var containsSearchTerms = exercises[i].Name.toLowerCase().indexOf(filterValue.toLowerCase()) > -1;
-
-                if (containsSearchTerms && isTheRightMuscularGroup) {
+                var containsSearchTerms = exercises[i].name.toLowerCase().indexOf(filterValue.toLowerCase()) > -1;
+                if (containsSearchTerms) {
                     matches.push(exercises[i]);
-
                 }
             }
             return matches;

@@ -33,7 +33,6 @@ namespace WorkoutTracker.Test.Integration
         {
             var newExercise = new Exercise
             {
-                MuscularGroup = MuscularGroup.Shoulders, 
                 Name = "Power Clean",
                 Description = "The overhead squat is a deep squat performed while holding a barbell over your head with straight arms. It actually feels more like a snatch (one of the Olympic lifts) than a back squat."
             };
