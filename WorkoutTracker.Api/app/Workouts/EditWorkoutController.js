@@ -23,7 +23,6 @@
             $scope.workout.id = $routeParams.id;
             workoutService.get($scope.workout.id).then(function (workout) {
                 $scope.workout = workout.data;
-                $scope.workout.dt = workout.data.date;
                 return exerciseService.getAll();
             }).then(function (exercises) {
                 $scope.exercises = exercises.data;
@@ -70,12 +69,12 @@
         //Begin Calendar code
 
         $scope.today = function () {
-            $scope.workout.dt = new Date();
+            $scope.workout.date = new Date();
         };
         $scope.today();
 
         $scope.clear = function () {
-            $scope.workout.dt = null;
+            $scope.workout.date = null;
         };
 
         $scope.toggleMin = function () {
@@ -116,7 +115,7 @@
             
         }
         $scope.deleteNewImage = function () {
-            $scope.files = null;
+            $scope.file = undefined;
             $scope.imageSrc = null;
         }
 
