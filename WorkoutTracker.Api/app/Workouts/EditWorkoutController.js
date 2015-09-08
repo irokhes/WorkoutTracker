@@ -23,6 +23,9 @@
             $scope.workout.id = $routeParams.id;
             workoutService.get($scope.workout.id).then(function (workout) {
                 $scope.workout = workout.data;
+                $scope.workout.time = new Date();
+                $scope.workout.time.minutes = $scope.workout.time.getMinutes();
+                $scope.workout.time.seconds = $scope.workout.time.getSeconds();
                 return exerciseService.getAll();
             }).then(function (exercises) {
                 $scope.exercises = exercises.data;
@@ -124,6 +127,7 @@
             if (typeof $scope.file != 'undefined') {
                 $scope.files.push($scope.file);
             }
+            $scope.workout.time = '0:' + $scope.workout.time.minutes + ':' + $scope.workout.time.seconds;
             workoutService.save($scope.workout.id, $scope.workout, $scope.files)
             .success(function (data) {
                 $location.path('/workouts');

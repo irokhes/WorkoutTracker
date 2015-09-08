@@ -11,8 +11,11 @@ namespace WorkoutTracker.Api.Dtos
         public string Name { get; set; }
         public string Description { get; set; }
         public DateTime Date { get; set; }
+        public TimeSpan Time { get; set; }
 
         [JsonConverter(typeof(StringEnumConverter))]
         public WODType WODType { get; set; }
+
+        public string RoundsOrTotalReps { get; set; }
     }
 }

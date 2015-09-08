@@ -38,7 +38,10 @@ namespace WorkoutTracker.Api.Controllers
                     Name = x.Name,
                     Description = x.Description,
                     Date = x.Date,
-                    WODType = x.WODType
+                    Time = x.Time,
+                    RoundsOrTotalReps = x.RoundsOrTotalReps,
+                    WODType = x.WODType,
+                    
                 }).ToList();
         }
 

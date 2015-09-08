@@ -29,6 +29,20 @@
         </div>
     </div>
     <div class="form-group">
+        <label for="typeOfWOd" class="col-sm-2 control-label">Time</label>
+        <div class="col-sm-2">
+            <div class="col-sm-5">
+                <input type="text" ng-model="workout.time.minutes" class="form-control" id="inputDescription" placeholder="00">
+            </div>
+            <div class="col-sm-1">
+                <span class="vertical-align">:</span>
+            </div>
+            <div class="col-sm-5">
+                <input type="text" ng-model="workout.time.seconds" class="form-control" id="inputDescription" placeholder="00">
+            </div>
+        </div>
+    </div>
+    <div class="form-group">
         <label for="image" class="col-sm-2 control-label">Picture of results</label>
         <div class="col-sm-8 row">
             <div>
@@ -101,9 +115,14 @@
         <div class="form-group col-lg-4">
             <label for="inputNewExerciseName" class="sr-only">Exercise Name</label>
             <div>
-                <input type="text" id="inputNewExerciseName" class="form-control" placeholder="Search for an exercise" ng-change="onChange()" ng-model="selectedExercise" typeahead="exercise.name  for exercise in exercises | filter:{name: $viewValue} | limitTo:3" typeahead-on-select='onSelect($item)'>
+                <input type="text" id="inputNewExerciseName" class="form-control" placeholder="Search for an exercise" ng-change="onChange()"
+                       ng-model="selectedExercise"
+                       typeahead="exercise.name  for exercise in exercises | filter:{name: $viewValue} | limitTo:3"
+                       typeahead-on-select='onSelect($item)'>
             </div>
+            <span ng-if="noResults">No Results found</span>
         </div>
+
         <div class="form-group col-lg-2">
             <label for="inputNewExerciseReps" class="sr-only">N. Reps</label>
             <div>
