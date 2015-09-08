@@ -1,0 +1,21 @@
+{
+  "name": "WorkoutTracker",
+  "version": "0.1.0",
+  "homepage": "https://github.com/irokhes/WorkoutTracker",
+  "authors": [
+    "irokhes <jorgereyero@gmail.com>"
+  ],
+  "main": "index.html",
+  "license": "MIT",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "WorkoutTracker.Api/Scripts",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "angular-filereader": "~1.0.4"
+  }
+}

@@ -46,18 +46,21 @@ namespace WorkoutTracker.Test.Integration
         public void creating_a_new_workout()
         {
             var exercisesInDB = _unitOfWork.RepositoryFor<Exercise>().GetAll();
+            var exercises = exercisesInDB.Where(x => x.Name == "Wall Balls" || x.Name == "Wall Walks" || x.Name == "Squat Clean");
+            
             var workout = new Workout { 
                 Date = DateTime.Now, 
                 Name = "Holleyman 2.0", 
-                WODType = WODType.AFAP,  
-                Exercises = exercisesInDB
-                .Select(x => new WorkoutExercise{ Exercise = x, NumReps = 3, WeightOrDistance = 20}).ToList()};
+                WODType = WODType.AFAP,
+                Exercises = exercises
+                .Select(x => new WorkoutExercise{ Exercise = x, NumReps = 1, WeightOrDistance = 20}).ToList()};
+            exercises = exercisesInDB.Where(x => x.Name == "Broad Jump" || x.Name == "Thruster" || x.Name == "Pull Ups" || x.Name == "Lunges");
             var workout2 = new Workout
             {
                 Date = DateTime.Now,
                 Name = "Wod 22-7-15",
                 WODType = WODType.AMRAP,
-                Exercises = exercisesInDB
+                Exercises = exercises
                     .Select(x => new WorkoutExercise { Exercise = x, NumReps = 5, WeightOrDistance = 10 }).ToList()
             };
             _unitOfWork.RepositoryFor<Workout>().Insert(workout);

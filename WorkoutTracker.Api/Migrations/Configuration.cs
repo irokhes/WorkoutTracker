@@ -10,7 +10,6 @@ namespace WorkoutTracker.Api.Migrations
         public Configuration()
         {
             AutomaticMigrationsEnabled = false;
-            ContextKey = "WorkoutTracker.Api.Models.WorkoutTrackerContext";
         }
 
         protected override void Seed(WorkoutTracker.Api.Models.WorkoutTrackerContext context)

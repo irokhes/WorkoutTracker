@@ -161,6 +161,12 @@
     <Content Include="Global.asax" />
     <Content Include="Index.html" />
     <Content Include="Scripts\angular-bootstrap-lightbox.js" />
+    <Content Include="Scripts\angular-embed-timepicker\dist\angular-embed-timepicker.js" />
+    <Content Include="Scripts\angular-embed-timepicker\dist\angular-embed-timepicker.min.js" />
+    <Content Include="Scripts\angular-embed-timepicker\Gruntfile.js" />
+    <Content Include="Scripts\angular-embed-timepicker\index.html" />
+    <Content Include="Scripts\angular-embed-timepicker\karma-unit.conf.js" />
+    <Content Include="Scripts\angular-embed-timepicker\src\angular-embed-timepicker\angular-embed-timepicker.js" />
     <Content Include="Scripts\angular-filereader\angular-filereader.js" />
     <Content Include="Scripts\angular-filereader\angular-filereader.min.js" />
     <Content Include="Scripts\angular-filereader\gulpfile.js" />
@@ -186,11 +192,11 @@
     </Content>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="App_Start\AutoMapperWebConfiguration.cs" />
-    <Compile Include="App_Start\NinjectResolver.cs" />
-    <Compile Include="App_Start\NinjectScope.cs" />
-    <Compile Include="App_Start\NinjectWebCommon.cs" />
-    <Compile Include="App_Start\WebApiConfig.cs" />
+    <Compile Include="Dtos\App_Start\AutoMapperWebConfiguration.cs" />
+    <Compile Include="Dtos\App_Start\NinjectResolver.cs" />
+    <Compile Include="Dtos\App_Start\NinjectScope.cs" />
+    <Compile Include="Dtos\App_Start\NinjectWebCommon.cs" />
+    <Compile Include="Dtos\App_Start\WebApiConfig.cs" />
     <Compile Include="Controllers\WorkoutController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Dtos\ExerciseDto.cs" />
@@ -198,6 +204,10 @@
     <Compile Include="Dtos\WorkoutDto.cs" />
     <Compile Include="Dtos\WorkoutExerciseDto.cs" />
     <Compile Include="Dtos\WorkoutListDto.cs" />
+    <Compile Include="Migrations\AddRoundOrTotalRepsColumns.cs" />
+    <Compile Include="Migrations\AddRoundOrTotalRepsColumns.Designer.cs">
+      <DependentUpon>AddRoundOrTotalRepsColumns.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\RemoveMuscularGroupFromExercise.cs" />
     <Compile Include="Migrations\RemoveMuscularGroupFromExercise.Designer.cs">
       <DependentUpon>RemoveMuscularGroupFromExercise.cs</DependentUpon>
@@ -239,6 +249,13 @@
     <Content Include="Scripts\angular\bower.json" />
     <Content Include="Scripts\angular\package.json" />
     <Content Include="Scripts\angular\README.md" />
+    <Content Include="Scripts\angular-embed-timepicker\.bower.json" />
+    <Content Include="Scripts\angular-embed-timepicker\bower.json" />
+    <Content Include="Scripts\angular-embed-timepicker\LICENSE" />
+    <Content Include="Scripts\angular-embed-timepicker\package.json" />
+    <Content Include="Scripts\angular-embed-timepicker\README.md" />
+    <Content Include="Scripts\angular-embed-timepicker\src\angular-embed-timepicker\angular-embed-timepicker.prefix" />
+    <Content Include="Scripts\angular-embed-timepicker\src\angular-embed-timepicker\angular-embed-timepicker.suffix" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
@@ -250,6 +267,9 @@
     <Folder Include="App_Data\" />
   </ItemGroup>
   <ItemGroup>
+    <EmbeddedResource Include="Migrations\AddRoundOrTotalRepsColumns.resx">
+      <DependentUpon>AddRoundOrTotalRepsColumns.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Migrations\RemoveMuscularGroupFromExercise.resx">
       <DependentUpon>RemoveMuscularGroupFromExercise.cs</DependentUpon>
     </EmbeddedResource>
