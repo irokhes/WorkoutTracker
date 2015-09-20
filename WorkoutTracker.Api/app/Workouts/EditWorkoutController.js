@@ -17,125 +17,125 @@
 
 
         function init() {
-            if ($routeParams.id === 'undefined') {
-                return;
-            }
-            $scope.workout.id = $routeParams.id;
-            workoutService.get($scope.workout.id).then(function (workout) {
-                $scope.workout = workout.data;
-                $scope.workout.time = new Date();
-                $scope.workout.time.minutes = $scope.workout.time.getMinutes();
-                $scope.workout.time.seconds = $scope.workout.time.getSeconds();
-                return exerciseService.getAll();
-            }).then(function (exercises) {
+            exerciseService.getAll().then(function(exercises) {
                 $scope.exercises = exercises.data;
-            }).catch(function (error) {
+                if (typeof $routeParams.id === 'undefined') {
+
+                    $scope.workout.id = $routeParams.id;
+                    workoutService.get($scope.workout.id).then(function(workout) {
+                        $scope.workout = workout.data;
+                        $scope.workout.time = new Date();
+                        $scope.workout.time.minutes = $scope.workout.time.getMinutes();
+                        $scope.workout.time.seconds = $scope.workout.time.getSeconds();
+                    });
+                }
+
+            }).catch(function(error) {
                 $scope.status = 'Unable to load exercises: ' + error;
                 console.error('Unable to load exercises: ' + error);
             });
-
-        };
+        }
 
         $scope.onSelect = function ($item) {
-            $scope.isExerciseSelected = true;
-            console.info('exercise selected: ' + $item);
-            $scope.newExercise = $item;
-        };
+                $scope.isExerciseSelected = true;
+                console.info('exercise selected: ' + $item);
+                $scope.newExercise = $item;
+            };
 
-        $scope.onChange = function () {
-            if ($scope.isExerciseSelected) {
+            $scope.onChange = function () {
+                if ($scope.isExerciseSelected) {
+                    $scope.isExerciseSelected = false;
+                }
+            }
+            $scope.addExercise = function () {
+                $scope.workout.exercises.push({ exerciseId: $scope.newExercise.id, name: $scope.newExercise.name, numReps: $scope.newExercise.Reps, weightOrDistance: $scope.newExercise.weightOrDistance });
+                resetNewExercise();
+            };
+
+            $scope.deleteExercise = function (exercise) {
+                var index = $scope.workout.exercises.indexOf(exercise);
+                $scope.workout.exercises.splice(index, 1);
+            }
+
+            $scope.deleteImage = function(image) {
+                var index = $scope.workout.images.indexOf(image); 
+                $scope.workout.images.splice(index, 1);
+            }
+
+            function resetNewExercise() {
+                $scope.newExercise = {};
+                $scope.selectedExercise = '';
                 $scope.isExerciseSelected = false;
             }
-        }
-        $scope.addExercise = function () {
-            $scope.workout.exercises.push({ exerciseId: $scope.newExercise.id, name: $scope.newExercise.name, numReps: $scope.newExercise.Reps, weightOrDistance: $scope.newExercise.weightOrDistance });
-            resetNewExercise();
-        };
 
-        $scope.deleteExercise = function (exercise) {
-            var index = $scope.workout.exercises.indexOf(exercise);
-            $scope.workout.exercises.splice(index, 1);
-        }
+            //TODO move to directive
+            //Begin Calendar code
 
-        $scope.deleteImage = function(image) {
-            var index = $scope.workout.images.indexOf(image); 
-            $scope.workout.images.splice(index, 1);
-        }
+            $scope.today = function () {
+                $scope.workout.date = new Date();
+            };
+            $scope.today();
 
-        function resetNewExercise() {
-            $scope.newExercise = {};
-            $scope.selectedExercise = '';
-            $scope.isExerciseSelected = false;
-        }
+            $scope.clear = function () {
+                $scope.workout.date = null;
+            };
 
-        //TODO move to directive
-        //Begin Calendar code
+            $scope.toggleMin = function () {
+                $scope.minDate = $scope.minDate ? null : new Date();
+            };
+            $scope.toggleMin();
 
-        $scope.today = function () {
-            $scope.workout.date = new Date();
-        };
-        $scope.today();
+            $scope.open = function ($event) {
+                $event.preventDefault();
+                $event.stopPropagation();
 
-        $scope.clear = function () {
-            $scope.workout.date = null;
-        };
+                $scope.opened = true;
+            };
 
-        $scope.toggleMin = function () {
-            $scope.minDate = $scope.minDate ? null : new Date();
-        };
-        $scope.toggleMin();
+            $scope.dateOptions = {
+                formatYear: 'yy',
+                startingDay: 1
+            };
 
-        $scope.open = function ($event) {
-            $event.preventDefault();
-            $event.stopPropagation();
+            $scope.formats = ['dd-MMMM-yyyy', 'yyyy/MM/dd', 'dd.MM.yyyy', 'shortDate'];
+            $scope.format = $scope.formats[0];
+            //End calendar code
 
-            $scope.opened = true;
-        };
+            //an array of files selected
+            $scope.files = [];
 
-        $scope.dateOptions = {
-            formatYear: 'yy',
-            startingDay: 1
-        };
+            $scope.getFile = function () {
+                if (typeof $scope.file != 'undefined') {
+                    FileReader.readAsDataURL($scope.file, $scope).then(function (result) {
 
-        $scope.formats = ['dd-MMMM-yyyy', 'yyyy/MM/dd', 'dd.MM.yyyy', 'shortDate'];
-        $scope.format = $scope.formats[0];
-        //End calendar code
-
-        //an array of files selected
-        $scope.files = [];
-
-        $scope.getFile = function () {
-            if (typeof $scope.file != 'undefined') {
-                FileReader.readAsDataURL($scope.file, $scope).then(function (result) {
-
-                    console.info("File read correctly");
-                    $scope.imageSrc = result;
-                }, function (err) {
-                    // Do stuff
-                    console.info(err);
-                });
-            }
+                        console.info("File read correctly");
+                        $scope.imageSrc = result;
+                    }, function (err) {
+                        // Do stuff
+                        console.info(err);
+                    });
+                }
             
-        }
-        $scope.deleteNewImage = function () {
-            $scope.file = undefined;
-            $scope.imageSrc = null;
-        }
-
-        //the save method
-        $scope.save = function () {
-            if (typeof $scope.file != 'undefined') {
-                $scope.files.push($scope.file);
             }
-            $scope.workout.time = '0:' + $scope.workout.time.minutes + ':' + $scope.workout.time.seconds;
-            workoutService.save($scope.workout.id, $scope.workout, $scope.files)
-            .success(function (data) {
-                $location.path('/workouts');
-            }).
-            error(function (error) {
-                $scope.status = 'Unable to load exercises: ' + error.message;
-                console.error('Unable to load exercises: ' + error.message);
-            });
-        };
-    }]);
-})();
+            $scope.deleteNewImage = function () {
+                $scope.file = undefined;
+                $scope.imageSrc = null;
+            }
+
+            //the save method
+            $scope.save = function () {
+                if (typeof $scope.file != 'undefined') {
+                    $scope.files.push($scope.file);
+                }
+                $scope.workout.time = '0:' + $scope.workout.time.minutes + ':' + $scope.workout.time.seconds;
+                workoutService.save($scope.workout.id, $scope.workout, $scope.files)
+                .success(function (data) {
+                    $location.path('/workouts');
+                }).
+                error(function (error) {
+                    $scope.status = 'Unable to load exercises: ' + error.message;
+                    console.error('Unable to load exercises: ' + error.message);
+                });
+            };
+        }]);
+    })();

@@ -7,6 +7,7 @@ using Ninject;
 using Ninject.Web.Common;
 using WorkoutTracker.Api;
 using WorkoutTracker.Api.Models;
+using WorkoutTracker.Api.Services;
 
 [assembly: WebActivatorEx.PreApplicationStartMethod(typeof(NinjectWebCommon), "Start")]
 [assembly: WebActivatorEx.ApplicationShutdownMethodAttribute(typeof(NinjectWebCommon), "Stop")]
@@ -61,6 +62,7 @@ namespace WorkoutTracker.Api
         {
             kernel.Bind<DbContext>().To<WorkoutTrackerContext>();
             kernel.Bind(typeof (IRepository<>)).To(typeof (Repository<>));
+            kernel.Bind(typeof(IImageService)).To(typeof(ImageService));
             kernel.Bind<IUnitOfWork>().To<UnitOfWork>().InRequestScope().WithConstructorArgument(new WorkoutTrackerContext());
         }
     }

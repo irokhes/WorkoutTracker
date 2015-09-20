@@ -13,7 +13,7 @@
         init();
 
         function init() {
-            if ($routeParams.id === 'undefined') {
+            if (typeof $routeParams.id === 'undefined') {
                 return;
             }
             $scope.exercise.id = $routeParams.id;

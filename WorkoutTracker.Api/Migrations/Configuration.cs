@@ -1,18 +1,15 @@
 namespace WorkoutTracker.Api.Migrations
 {
-    using System;
-    using System.Data.Entity;
     using System.Data.Entity.Migrations;
-    using System.Linq;
 
-    internal sealed class Configuration : DbMigrationsConfiguration<WorkoutTracker.Api.Models.WorkoutTrackerContext>
+    internal sealed class Configuration : DbMigrationsConfiguration<Models.WorkoutTrackerContext>
     {
         public Configuration()
         {
             AutomaticMigrationsEnabled = false;
         }
 
-        protected override void Seed(WorkoutTracker.Api.Models.WorkoutTrackerContext context)
+        protected override void Seed(Models.WorkoutTrackerContext context)
         {
             //  This method will be called after migrating to the latest version.
 
