@@ -83,13 +83,15 @@ namespace WorkoutTracker.Api.Controllers
             var oldEntity = _unitOfWork.RepositoryFor<Workout>().GetById(id);
             var workout = Mapper.Map<WorkoutDto, Workout>(workoutDto, oldEntity);
 
-            if (id == 0)
+            if (id == 0)_unitOfWork.RepositoryFor<Workout>().Insert(workout);
+            foreach (var image in workoutDto.DeletedExercises)
             {
-                _unitOfWork.RepositoryFor<Workout>().Insert(workout);
+                _imageService.RemoveImage(image);
+                _unitOfWork.RepositoryFor<Images>().Delete(image.Id);
             }
-            
             _unitOfWork.Commit();
         }
+
 
         [Route("api/workout/upsert")]
         public async Task<HttpResponseMessage> SaveOrUpdate()

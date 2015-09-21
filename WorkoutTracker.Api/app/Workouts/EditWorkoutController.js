@@ -8,8 +8,9 @@
 
         $scope.typeOfWorkout = ['AMRAP', 'EMOM', 'AFAP', 'PowerLifting'];
         $scope.workout.wodType = $scope.typeOfWorkout[0];
-
+        $scope.deletedExercises = [];
         $scope.exercises = {};
+        
         $scope.selectedExercise = '';
         $scope.isExerciseSelected = false;
 
@@ -66,6 +67,7 @@
 
         $scope.deleteImage = function (image) {
             var index = $scope.workout.images.indexOf(image);
+            $scope.deletedExercises.push($scope.workout.images[index]);
             $scope.workout.images.splice(index, 1);
         }
 
@@ -137,6 +139,8 @@
             var minutes = $scope.workout.minutes === undefined ? 0 : $scope.workout.minutes;
             var seconds = $scope.workout.seconds === undefined ? 0 : $scope.workout.seconds;
             $scope.workout.time = '0:' + minutes + ':' + seconds;
+            $scope.workout.deletedExercises = $scope.deletedExercises;
+
             workoutService.save($scope.workout.id, $scope.workout, $scope.files)
             .success(function (data) {
                 $location.path('/workouts');
