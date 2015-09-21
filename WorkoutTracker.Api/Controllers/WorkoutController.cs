@@ -117,7 +117,7 @@ namespace WorkoutTracker.Api.Controllers
             var jsonWorkout = result.FormData["workout"];
             var workoutDto = JsonConvert.DeserializeObject<WorkoutDto>(jsonWorkout);
 
-            workoutDto.Images =_imageService.GetFiles(result.FileData).ToList();
+            workoutDto.Images.AddRange(_imageService.GetFiles(result.FileData).ToList());
 
             int getIdIfExistingWorkout = result.FormData["id"] == "undefined" ? 0 : int.Parse(result.FormData["id"]);
             var id = getIdIfExistingWorkout;
