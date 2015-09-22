@@ -135,6 +135,7 @@
   <ItemGroup>
     <Content Include="app\app.js" />
     <Content Include="app\Directives\file-upload.js" />
+    <Content Include="app\Directives\modal-confirmation-dialog.js" />
     <Content Include="app\Exercises\EditExerciseController.js" />
     <Content Include="app\Exercises\editExercise.html" />
     <Content Include="app\Exercises\detailExercise.html" />
@@ -144,7 +145,9 @@
     <Content Include="app\Exercises\ExerciseController.js" />
     <Content Include="app\Filters\workoutsFilter.js" />
     <Content Include="app\Filters\exercisesFilter.js" />
+    <Content Include="app\ModalDialog\ModalDialogController.js" />
     <Content Include="app\Navigation\NavigationController.js" />
+    <Content Include="app\ModalDialog\Template.html" />
     <Content Include="app\Workouts\DetailWorkoutController.js" />
     <Content Include="app\Workouts\detailWorkout.html" />
     <Content Include="app\Workouts\EditWorkoutController.js" />

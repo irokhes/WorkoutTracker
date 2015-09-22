@@ -1,6 +1,6 @@
 ﻿(function() {
     'use strict';
-    app.controller('ExerciseController', ['$scope', '$location', 'exerciseService', '$filter', function ($scope, $location, exerciseService, $filter) {
+    app.controller('ExerciseController', ['$scope', '$modal', '$location', 'exerciseService', '$filter', function ($scope, $modal, $location, exerciseService, $filter) {
         $scope.exercices = [];
         $scope.totalExercises = 0;
         $scope.filteredExercises = [];
@@ -26,8 +26,32 @@
             $location.path('/exercises/edit/' + id);
         }
 
-        $scope.delete = function () {
+        $scope.delete = function (id) {
+            var modalInstance = $modal.open({
+                templateUrl: '/app/ModalDialog/template.html',
+                controller: 'ModalDialogCtrl',
+                resolve: {
+                    isOk: function () {
+                        return $scope.isOk;
+                    }
+                }
+            });
 
+            modalInstance.result.then(function () {
+                //delete action goes here
+                console.info('Modal closed by user');
+                exerciseService.delete(id).success(function(data) {
+                    console.info('Exercise deleted');
+                    
+
+                }).error(function (error) {
+                    $scope.status = 'Unable to load exercises: ' + error.message;
+                });
+            }, function () {
+                $scope.selected = false;
+                console.info('Modal closed with result: false');
+                console.info('Modal dismissed at: ' + new Date());
+            });
         }
 
         $scope.filter = function () {
