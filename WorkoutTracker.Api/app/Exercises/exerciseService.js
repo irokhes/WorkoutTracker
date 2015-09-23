@@ -19,5 +19,9 @@
             return $http.put(urlBase + '/' + id, exercise);
         };
 
+        this.delete = function(id) {
+            return $http.delete(urlBase + '/' + id);
+        };
+
     }]);
 })();

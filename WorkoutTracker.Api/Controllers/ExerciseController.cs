@@ -66,5 +66,20 @@ namespace WorkoutTracker.Api.Controllers
             return Content(HttpStatusCode.Accepted, exerciseDto);
 
         }
+
+        [HttpDelete]
+        [Route("api/exercise/{id:int}")]
+        public IHttpActionResult Delete(int id)
+        {
+            var exercise = _unitOfWork.RepositoryFor<Exercise>().GetById(id);
+            if (exercise == null)
+            {
+                return NotFound();
+            }
+            _unitOfWork.RepositoryFor<Exercise>().Delete(id);
+            _unitOfWork.Commit();
+
+            return Ok();
+        }
     }
 }

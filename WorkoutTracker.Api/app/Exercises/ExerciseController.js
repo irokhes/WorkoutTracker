@@ -26,7 +26,7 @@
             $location.path('/exercises/edit/' + id);
         }
 
-        $scope.delete = function (id) {
+        $scope.delete = function (exercise) {
             var modalInstance = $modal.open({
                 templateUrl: '/app/ModalDialog/template.html',
                 controller: 'ModalDialogCtrl',
@@ -38,19 +38,16 @@
             });
 
             modalInstance.result.then(function () {
-                //delete action goes here
-                console.info('Modal closed by user');
-                exerciseService.delete(id).success(function(data) {
+                exerciseService.delete(exercise.id).success(function (data) {
                     console.info('Exercise deleted');
-                    
+                    var index = $scope.filteredExercises.indexOf(exercise);
+                    $scope.filteredExercises.splice(index, 1);
 
                 }).error(function (error) {
-                    $scope.status = 'Unable to load exercises: ' + error.message;
+                    $scope.status = 'Error deleting exercise: ' + error.message;
                 });
             }, function () {
-                $scope.selected = false;
-                console.info('Modal closed with result: false');
-                console.info('Modal dismissed at: ' + new Date());
+                //modal closed
             });
         }
 
