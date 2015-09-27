@@ -194,9 +194,11 @@
     <Compile Include="App_Start\NinjectScope.cs" />
     <Compile Include="App_Start\NinjectWebCommon.cs" />
     <Compile Include="App_Start\WebApiConfig.cs" />
+    <Compile Include="Controllers\ExerciseMaxRepController.cs" />
     <Compile Include="Controllers\WorkoutController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Dtos\ExerciseDto.cs" />
+    <Compile Include="Dtos\ExerciseMaxRepDto.cs" />
     <Compile Include="Dtos\ImageDto.cs" />
     <Compile Include="Dtos\WorkoutDto.cs" />
     <Compile Include="Dtos\WorkoutExerciseDto.cs" />
@@ -214,6 +216,7 @@
       <DependentUpon>InitialCreate.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
+    <Compile Include="Models\ExerciseMaxRep.cs" />
     <Compile Include="Models\Images.cs" />
     <Compile Include="Models\WorkoutExercise.cs" />
     <Compile Include="Models\Exercise.cs" />

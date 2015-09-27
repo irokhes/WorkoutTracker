@@ -8,6 +8,7 @@ namespace WorkoutTracker.Api.Models
     public class WorkoutTrackerContext : DbContext
     {
         public DbSet<Exercise> Exercises { get; set; }
+        public DbSet<ExerciseMaxRep> ExerciseMaxRep { get; set; }
         public DbSet<Workout> Workouts { get; set; }
         public DbSet<WorkoutExercise> WorkoutExercises { get; set; }
 
@@ -21,6 +22,7 @@ namespace WorkoutTracker.Api.Models
         {
             modelBuilder.Entity<WorkoutExercise>()
                         .HasKey(cp => new { cp.WorkoutId, cp.ExerciseId });
+
 
             modelBuilder.Entity<Exercise>()
                 .HasMany(x => x.WorkoutsExercises)
