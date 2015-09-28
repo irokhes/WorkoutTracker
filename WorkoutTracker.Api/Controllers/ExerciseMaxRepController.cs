@@ -4,6 +4,7 @@ using System.Globalization;
 using System.Linq;
 using System.Net;
 using System.Net.Http;
+using System.Security.Cryptography.X509Certificates;
 using System.Web.Http;
 using WorkoutTracker.Api.Dtos;
 using WorkoutTracker.Api.Models;
@@ -22,24 +23,29 @@ namespace WorkoutTracker.Api.Controllers
         [Route("api/maxRep")]
         public IEnumerable<ExerciseMaxRepDto> Get()
         {
-            return _unitOfWork.RepositoryFor<ExerciseMaxRep>().GetAll().Select(x => new ExerciseMaxRepDto
+            return _unitOfWork.RepositoryFor<ExerciseMaxRep>().GetAll().ToList().Select(x => new ExerciseMaxRepDto
             {
+                Id = x.Id,
                 ExerciseName = x.Exercise.Name,
+                ExerciseId = x.ExerciseId,
                 Date = x.Date,
                 Weight = x.Weight
             });
         }
 
-        [Route("api/maxRep/{int}")]
-        public IHttpActionResult Get(int exerciseId)
+        [HttpGet]
+        [Route("api/maxRep/exercise/{exerciseId:int}")]
+        public IHttpActionResult GetByExerciseId(int exerciseId)
         {
-            var maxRep = _unitOfWork.RepositoryFor<ExerciseMaxRep>().Get(x => x.Exercise.Id == exerciseId).FirstOrDefault();
+            var maxRep = _unitOfWork.RepositoryFor<ExerciseMaxRep>().Get(x => x.ExerciseId == exerciseId).FirstOrDefault();
             if (maxRep == null)
                 return NotFound();
 
             return Ok(new ExerciseMaxRepDto
             {
+                Id = maxRep.Id,
                 ExerciseName = maxRep.Exercise.Name,
+                ExerciseId = maxRep.ExerciseId,
                 Date = maxRep.Date,
                 Weight = maxRep.Weight
             });

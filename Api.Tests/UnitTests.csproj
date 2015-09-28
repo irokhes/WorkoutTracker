@@ -76,7 +76,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="MaxRepControllerTests.cs" />
+    <Compile Include="ExerciseMaxRepControllerTests.cs" />
     <Compile Include="ExerciseControllerTests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="WorkoutControllerTests.cs" />

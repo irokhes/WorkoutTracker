@@ -44,9 +44,13 @@
             templateUrl: "app/Workouts/editWorkout.html"
         })
         .when("/maxreps", {
-            controller: "MaxRepController",
+            controller: "maxRepController",
             templateUrl: "app/MaxReps/maxrep.html"
-            })
+        })
+        .when("/maxReps/detail/:id", {
+            controller: "detailMaxRepController",
+            templateUrl: "app/MaxReps/detailMaxRep.html"
+        })
         .otherwise({ redirectTo: '/workouts' });
     });
 })();

@@ -143,8 +143,14 @@
     <Content Include="app\Exercises\DetailExerciseController.js" />
     <Content Include="app\Exercises\exerciseService.js" />
     <Content Include="app\Exercises\ExerciseController.js" />
+    <Content Include="app\Filters\maxRepFilter.js" />
     <Content Include="app\Filters\workoutsFilter.js" />
     <Content Include="app\Filters\exercisesFilter.js" />
+    <Content Include="app\MaxReps\detailMaxRep.html" />
+    <Content Include="app\MaxReps\detailMaxRepController.js" />
+    <Content Include="app\MaxReps\maxRepService.js" />
+    <Content Include="app\MaxReps\maxRepController.js" />
+    <Content Include="app\MaxReps\maxRep.html" />
     <Content Include="app\ModalDialog\ModalDialogController.js" />
     <Content Include="app\Navigation\NavigationController.js" />
     <Content Include="app\ModalDialog\Template.html" />
@@ -203,6 +209,10 @@
     <Compile Include="Dtos\WorkoutDto.cs" />
     <Compile Include="Dtos\WorkoutExerciseDto.cs" />
     <Compile Include="Dtos\WorkoutListDto.cs" />
+    <Compile Include="Migrations\AddMaxRepModel.cs" />
+    <Compile Include="Migrations\AddMaxRepModel.Designer.cs">
+      <DependentUpon>AddMaxRepModel.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\AddRoundOrTotalRepsColumns.cs" />
     <Compile Include="Migrations\AddRoundOrTotalRepsColumns.Designer.cs">
       <DependentUpon>AddRoundOrTotalRepsColumns.cs</DependentUpon>
@@ -260,10 +270,12 @@
     </None>
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="app\MaxReps\" />
     <Folder Include="App_Data\" />
   </ItemGroup>
   <ItemGroup>
+    <EmbeddedResource Include="Migrations\AddMaxRepModel.resx">
+      <DependentUpon>AddMaxRepModel.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Migrations\AddRoundOrTotalRepsColumns.resx">
       <DependentUpon>AddRoundOrTotalRepsColumns.cs</DependentUpon>
     </EmbeddedResource>

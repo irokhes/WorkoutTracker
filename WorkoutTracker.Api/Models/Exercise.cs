@@ -12,7 +12,7 @@ namespace WorkoutTracker.Api.Models
         public string Description { get; set; }
 
         public virtual ICollection<WorkoutExercise> WorkoutsExercises { get; set; }
-
+        public virtual ICollection<ExerciseMaxRep> MaxReps { get; set; }
     }
 
     public enum Split

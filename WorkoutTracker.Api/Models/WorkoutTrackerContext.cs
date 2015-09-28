@@ -29,6 +29,11 @@ namespace WorkoutTracker.Api.Models
                 .WithRequired(y => y.Exercise)
                 .HasForeignKey(x => x.ExerciseId);
 
+            modelBuilder.Entity<Exercise>()
+                .HasMany(x => x.MaxReps)
+                .WithRequired(y => y.Exercise)
+                .HasForeignKey(x => x.ExerciseId);
+
             modelBuilder.Entity<Workout>()
                 .HasMany(x => x.Exercises)
                 .WithRequired(y => y.Workout)
