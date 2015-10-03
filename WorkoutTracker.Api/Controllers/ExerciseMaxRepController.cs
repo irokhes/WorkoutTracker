@@ -1,10 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Globalization;
 using System.Linq;
-using System.Net;
-using System.Net.Http;
-using System.Security.Cryptography.X509Certificates;
 using System.Web.Http;
 using WorkoutTracker.Api.Dtos;
 using WorkoutTracker.Api.Models;
@@ -37,18 +33,16 @@ namespace WorkoutTracker.Api.Controllers
         [Route("api/maxRep/exercise/{exerciseId:int}")]
         public IHttpActionResult GetByExerciseId(int exerciseId)
         {
-            var maxRep = _unitOfWork.RepositoryFor<ExerciseMaxRep>().Get(x => x.ExerciseId == exerciseId).FirstOrDefault();
-            if (maxRep == null)
-                return NotFound();
+            var maxReps = _unitOfWork.RepositoryFor<ExerciseMaxRep>().Get(x => x.ExerciseId == exerciseId).ToList();
 
-            return Ok(new ExerciseMaxRepDto
+            return Ok(maxReps.Select(maxRep => new ExerciseMaxRepDto
             {
                 Id = maxRep.Id,
                 ExerciseName = maxRep.Exercise.Name,
                 ExerciseId = maxRep.ExerciseId,
                 Date = maxRep.Date,
                 Weight = maxRep.Weight
-            });
+            }));
         }
 
         [HttpPost]

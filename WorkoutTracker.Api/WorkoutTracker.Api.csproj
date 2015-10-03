@@ -134,6 +134,8 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="app\app.js" />
+    <Content Include="app\Directives\wod-datapicker\datepicker.html" />
+    <Content Include="app\Directives\wod-datapicker\wod-datepicker.js" />
     <Content Include="app\Directives\file-upload.js" />
     <Content Include="app\Directives\modal-confirmation-dialog.js" />
     <Content Include="app\Exercises\EditExerciseController.js" />

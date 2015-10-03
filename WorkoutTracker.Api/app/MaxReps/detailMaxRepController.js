@@ -1,8 +1,25 @@
 ﻿(function() {
     'use strict';
-    app.controller('detailMaxRepController', ['$scope', '$modal', '$location','$routeParams', 'maxRepService', '$filter', function ($scope, $modal, $location, $routeParams, maxRepService, $filter) {
+    app.controller('detailMaxRepController', ['$scope', '$modal', '$location', '$routeParams', 'maxRepService', '$filter', function ($scope, $modal, $location, $routeParams, maxRepService, $filter) {
         $scope.maxReps = [];
         $scope.isEditing = false;
+
+        /*       
+        Calendar Options
+        */
+
+        $scope.formData = {};
+        $scope.date = "";
+        $scope.format = 'MM/dd/yyyy';
+        $scope.opened = false;
+
+        //Datepicker
+        $scope.dateOptions = {
+            'format': "'yy'",
+            'show-weeks': false,
+
+        };
+
 
         init();
 
@@ -10,7 +27,7 @@
             getMaxRepsByExerciseId($routeParams.id);
         };
 
-        $scope.newExercise = function() {
+        $scope.newMaxRep = function () {
             $scope.isEditing = true;
         }
 

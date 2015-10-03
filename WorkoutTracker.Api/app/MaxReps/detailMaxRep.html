@@ -1,53 +1,55 @@
-﻿<form class="form-horizontal" ng-if="isEditing">
-    <div class="form-group">
-        <label for="inputName" class="col-sm-2 control-label">Name</label>
-        <div class="col-sm-10">
-            <input type="text" id="inputNewExerciseName" class="form-control" placeholder="Search for an exercise" ng-change="onChange()"
-                   ng-model="selectedExercise"
-                   typeahead="exercise.name  for exercise in exercises | filter:{name: $viewValue} | limitTo:3"
-                   typeahead-on-select='onSelect($item)'>
-        </div>
-    </div>
-    <div class="form-group">
-        <label for="inputDescription" class="col-sm-2 control-label">Weight</label>
-        <div class="col-sm-10">
-            <input type="text" ng-model="exercise.description" class="form-control" id="inputDescription" placeholder="Description">
-        </div>
-    </div>
-    <div class="form-group">
-        <div class="col-sm-offset-2 col-sm-10">
-            <button type="button" ng-click="save()" class="btn btn-primary"><span class="glyphicon glyphicon-floppy-disk"></span>&nbsp;Save</button>
-        </div>
-    </div>
-</form>
+﻿
 <div class="col-xs-12 col-sm-12 col-md-offset-2 col-md-8 col-md-offset-2">
-    
-    <ul class="list-group" ng-repeat="maxRep in maxReps">
-        <li class="list-group-item">
-            <div class="row vertical-align">
-                <div class="col-xs-6 col-md-6">
-                    <a href="" ng-click="showExerciseDetails(exercise.id)">
-                        <h2>{{maxRep.exerciseName}}</h2>
-                    </a>
-                </div>
-                <div class="col-xs-2 col-md-2">
-                    <span>{{maxRep.weight}} Kgs</span>
-                </div>
-                <div class="col-xs-2 col-md-2">
-                    <span>{{maxRep.date}}</span>
-                </div>
-                <div class=" col-xs-2 col-md-2 btn-group">
-                    <button class="btn-group" data-ng-click="edit(maxRep.id)"><span class="glyphicon glyphicon-pencil"></span></button>
-                    <button class="btn-group" data-ng-click="delete(maxRep)"><span class="glyphicon glyphicon-remove"></span></button>
-                </div>
+    <form class="form-horizontal">
+        <div class="form-group">
+            <div class="col-md-10">
+                <h2>{{maxReps[0].exerciseName}}</h2>
             </div>
-            <div class="row">
-                <div class="col-xs-2 col-md-1">
-
+            <div class="col-md-2 col-xs-4 col-sm-2">
+                <button class="btn btn-primary pull-right" data-ng-click="newMaxRep()"><span class="glyphicon glyphicon-plus"></span>&nbsp;New PB</button>
+            </div>
+        </div>
+        <div ng-if="isEditing">
+            <div class="form-group">
+                <label for="inputName" class="col-sm-2">Date</label>
+                <div>
+                    <wod-datepicker ng-model="date" format="format" date-options="dateOptions" opened="opened" />        
                 </div>
             </div>
 
-        </li>
-    </ul>
- 
+            <div class="form-group">
+                <label for="inputDescription" class="col-sm-2">Weight</label>
+                <div class="col-sm-10">
+                    <input type="text" ng-model="exercise.description" class="form-control" id="inputDescription" placeholder="Weight">
+                </div>
+            </div>
+            <div class="form-group">
+                <div class="col-sm-offset-2 col-sm-10">
+                    <button type="button" ng-click="save()" class="btn btn-primary"><span class="glyphicon glyphicon-floppy-disk"></span>&nbsp;Save</button>
+                </div>
+            </div>
+        </div>
+        <ul class="list-group" ng-repeat="maxRep in maxReps">
+            <li class="list-group-item">
+                <div class="row vertical-align">
+                    <div class="col-xs-4 col-md-4">
+                        <span>{{maxRep.weight}} Kgs</span>
+                    </div>
+                    <div class="col-xs-6 col-md-6">
+                        <span>{{maxRep.date | date:'dd-MM-yyyy'}}</span>
+                    </div>
+                    <div class=" col-xs-2 col-md-2 btn-group">
+                        <button class="btn-group" data-ng-click="edit(maxRep.id)"><span class="glyphicon glyphicon-pencil"></span></button>
+                        <button class="btn-group" data-ng-click="delete(maxRep)"><span class="glyphicon glyphicon-remove"></span></button>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-xs-2 col-md-1">
+
+                    </div>
+                </div>
+
+            </li>
+        </ul>
+    </form>
 </div>
